@@ -221,8 +221,6 @@ tags:
       [Returned Resources](#tag/Returned-Resources) `data[].id` element contains the Resource ID. In above example [Mandate Resource](#operation/viewMandateUsingGET) needs to be retrieved to get the `mandateId` and [Creditor Scheme Resource](#operation/listCreditorSchemesUsingGET) needs to be retrieved to get `schemeId`.
       
   - name: Links
-  - name: Organization
-    description: Organization endpoints
   - name: Transactions
     description: |-
       Transaction is a resource that describes a posting to an account that results in an increase or decrease to a balance of the account.
@@ -266,13 +264,6 @@ tags:
       Overdraft Fee | OVERDRAFT_FEE | DEBIT | N/A for Fees
   - name: Balances
     description: Balances endpoints
-  - name: Originator
-    description: |-
-      Originator, also known as debtor or merchant is the party initiating Direct Debit payment. The endpoint can be used to retrieve details of the party.
-
-      To access Originator use the following URL:
-
-      `https://api.nuapay.com/originator`
   - name: Mandates
     description: |-
       Mandates are associated to a Creditor Scheme (CORE or B2B) and enable the collection of funds from a debtor's account to a creditor's account via a Direct Debit.To access a mandate use the following URL: `https://api.nuapay.com/schemes/{schemeId}/mandates/{mandateId}`
@@ -917,11 +908,6 @@ tags:
 
       ## 2015-09-01
       * API public release.
-  - name: Organizations
-    description: |-
-      The APIs under Organizations section  are dedicated for Bank and Bank Group organizations to manage child organizations in hierarchy chain.
-      
-      Access to the APIs is granted only for limited customers and requires particular access rights.
 x-tagGroups:
   - name: Generial Info
     tags:
@@ -957,14 +943,9 @@ x-tagGroups:
       - Transfers
   - name: Other APIs
     tags:
-      - Organization
-      - Originator
       - Files
       - Validate Accounts
       - Other
-  - name: Bank Level APIs
-    tags:
-      - Organizations
   - name: Responses
     tags:
       - About Responses
@@ -1842,6 +1823,73 @@ paths:
       security:
         - OriginatorOAuth2: []
         - OriginatorApiKey: []
+  /accounts/{accountId}/transactions/{transactionId}:
+    get:
+      tags: 
+        - Transactions
+      description: |-
+        GET request used to retrieve a transaction.
+      summary: Retrieve transaction
+      operationId: viewTransactionUsingGET
+      produces:
+      - application/json
+      parameters:
+      - name: accountId
+        in: path
+        description: accountId
+        required: true
+        type: string
+      - name: transactionId
+        in: path
+        description: transactionId
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/RestResponseEnvelopeOfViewAccountTransactionResponse'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+          examples:
+            application/json:
+              returnCode: null
+              returnDescription: null
+              details: null
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+          examples:
+            application/json:
+              returnCode: '10091'
+              returnDescription: Access denied
+              details: null
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+          examples:
+            application/json:
+              returnCode: '10093'
+              returnDescription: Requested resource is not available
+              details: null   
+        405:
+          description: Method Not Allowed
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+          examples:
+            application/json:
+              returnCode: null
+              returnDescription: null
+              details: null         
+      x-sentenial:
+        enriched: true
+      security:
+      - OriginatorApiKey: []
+      - OriginatorOAuth2: []
   /beneficiaries:
     get:
       tags:
@@ -3704,132 +3752,6 @@ paths:
       security:
         - OriginatorOAuth2: []
         - OriginatorApiKey: []
-  /organizations:
-    get:
-      tags:
-        - Organizations
-      summary: List Organizations in requesting Organization hierarchy
-      description: The endpoint allows to list Organizations in requesting Organization hierarchy
-      operationId: ListOrganizationsUsingGET
-      parameters:
-        - name: pagenumber
-          in: query
-          description: Page number
-          required: false
-          type: integer
-          format: int32
-          default: 1
-        - name: pagesize
-          in: query
-          description: Page size
-          required: false
-          type: integer
-          format: int32
-          default: 20
-      produces:
-        - application/json
-      responses:
-        200:
-          description: OK
-          schema:
-            $ref: '#/definitions/OrganizationsResponse'
-          examples:
-            application/json:
-              uri: "/organizations"
-              data: 
-               - 
-                id: j29p3kpabx
-                uri: /originator
-                originatorDetails:
-                  name: Originator Name
-                  countryOfRegistration: IE
-                  code: ORNA
-                  registeredNumber: '32342'
-                  vatNumber: null
-                  language: EN
-                address:
-                  line1: Address
-                  line2: null
-                  line3: null
-                  town: Town
-                  postCode: null
-                  country: IE
-                primaryContact:
-                  firstName: OriginatorFirstName
-                  lastName: OriginatorLastName
-                  telephone: '21242124'
-                  mobile: null
-                  fax: null
-                  email1: originatoremail@sentenial.com
-                  email2: null
-                  title: Mr
-                  position: None
-                  primaryContact: true
-                  customerContact: false
-                  emailNotification: false
-                links: []
-              page: 
-               pageNumber: 1
-               pageSize: 20
-               totalElements: 1
-               totalPages: 1
-              sort: []
-        400:
-          description: Bad request
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-          examples:
-            application/json:
-              returnCode: '8888'
-              returnDescription: 'Input validation errors occurred. Please check details.'
-              details:
-              - code: '7050'
-                field: pagenumber
-                description: Page Number is invalid
-                resourceUri: null
-        401:
-          description: Unauthorized
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-        403:
-          description: Forbidden
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-          examples:
-            application/json:
-              returnCode: 'tbd'
-              returnDescription: Service not available for this access type
-              details: null
-        405:
-          description: Method Not Allowed
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null            
-        422:
-          description: Unprocessable Entity
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-          examples:
-            application/json:
-              returnCode: '8888'
-              returnDescription: 'Input validation errors occurred. Please check details.'
-              details:
-              - code: '7051'
-                field: pagesize
-                description: Max page size is exceeded
-                resourceUri: null
-      security:
-      - OriginatorOAuth2: []
-      - OriginatorApiKey: []
   /paymentschedules:
     get:
       tags:
@@ -7187,25 +7109,24 @@ definitions:
     properties:
       amount:
         type: number
-        description: Balance After Transaction. Max length without decimals is 12 digits. Decimal separator is '.'. Max two decimal places.
+        minimum: 0.00
+        description: Balance After Transaction. Decimal separator is '.'. Max two decimal places.
       creditDebitIndicator:
         type: string
         enum:
-          - CREDIT
-          - DEBIT
-        description: Account credit / debit indicator  
+        - DEBIT
+        - CREDIT
       currency:
         type: string
-        description: Balance currency
+        description: Currency
         enum:
           - EUR
           - GBP
       type:
         type: string
         enum:
-          - AVAILABLE_BALANCE
-          - BOOKED_BALANCE
-        description: Balance type, in transaction object always 'BOOKED_BALANCE'.
+        - AVAILABLE_BALANCE
+        - BOOKED_BALANCE
   AccountIdentificationEntity:
     type: object
     properties:
@@ -8193,21 +8114,6 @@ definitions:
         description: The ultimate creditor/debtor bic.
       other:
         $ref: '#/definitions/OtherEntity'
-  OrganizationsResponse:
-    type: object
-    properties: 
-      uri:
-        type: string
-      data:
-        type: array
-        items:
-          $ref: '#/definitions/RestResponseEnvelopeInnerOfOriginatorResponse'
-      page:
-        $ref: '#/definitions/RestResponsePaginationDetails'
-      sort:
-        type: array
-        items:
-          type: string
   OriginatorAccount:
     type: object
     properties:
@@ -8276,21 +8182,6 @@ definitions:
         type: string
         pattern: '[a-zA-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}'
         description: IBAN
-  OriginatorDetails:
-    type: object
-    properties:
-      code:
-        type: string
-      countryOfRegistration:
-        type: string
-      language:
-        type: string
-      name:
-        type: string
-      registeredNumber:
-        type: string
-      vatNumber:
-        type: string
   OtherEntity:
     type: object
     required:
@@ -9376,25 +9267,6 @@ definitions:
       uri:
         type: string
         description: resource Uri
-  RestResponseEnvelopeInnerOfOriginatorResponse:
-    type: object
-    properties:
-      address:
-        $ref: '#/definitions/Address'
-      id:
-        type: string
-        description: Resource Id
-      links:
-        type: array
-        items:
-          $ref: '#/definitions/RestResponseLink'
-      originatorDetails:
-        $ref: '#/definitions/OriginatorDetails'
-      primaryContact:
-        $ref: '#/definitions/PrimaryContact'
-      uri:
-        type: string
-        description: resource Uri
   RestResponseEnvelopeInnerOfPaymentScheduleResponseEntity:
     type: object
     properties:
@@ -9888,6 +9760,58 @@ definitions:
       uri:
         type: string
         description: Resource Uri
+  RestResponseEnvelopeOfViewAccountTransactionResponse:
+    type: object
+    properties:
+      uri:
+        type: string
+      data:
+        $ref: '#/definitions/RestResponseEnvelopeInnerOfAccountTransactionEntity'      
+    example:
+      uri: /accounts/p2lq97jamv/transactions/abxgelnw5m
+      data:
+        id: abxgelnw5m
+        uri: /accounts/p2lq97jamv/transactions/abxgelnw5m
+        links: []
+        postingDate: '2018-09-06'
+        transactionType: INCOMING_CREDIT_TRANSFER
+        valueDate: '2018-09-27'
+        amount: 10000
+        currency: EUR
+        creditDebitIndicator: CREDIT
+        purposeCode: BKDF
+        endToEndId: endToEndId
+        mandateReference: null
+        ultimateCreditorId: null
+        ultimateCreditorName: null
+        ultimateDebtorId: null
+        ultimateDebtorName: null
+        reasonCode: null
+        reasonProprietary: null
+        bulkMessageId: null
+        batchReference: null
+        unstructuredRemittanceInformation: unstructuredRemittanceInformation
+        remittanceInfo: remittanceInfo
+        schemeType: null
+        numberOfTransactions: null
+        totalAmount: null
+        balanceAfterTransaction: null
+        counterparty:
+          name: counterparty name
+          address:
+            line1: address line1
+            line2: address line1
+            postalCode: '123123'
+            town: town
+            country: IE
+          account:
+            bic: SELNGB21
+            iban: GB94SELN00999976543215
+            domesticAccountNumber: null
+            domesticBankCode: null
+            domesticBranchCode: null
+            domesticCheckSum: null
+            domesticAccountCountry: null      
   RestResponseLink:
     type: object
     properties:
