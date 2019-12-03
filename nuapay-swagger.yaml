@@ -2068,7 +2068,7 @@ paths:
       - name: JWS-Signature
         in: header
         description: JWS-Signature
-        required: false
+        required: true
         type: string
       - in: body
         name: addBeneficiaryRequest
@@ -2493,7 +2493,7 @@ paths:
         - name: JWS-Signature
           in: header
           description: JWS-Signature
-          required: false
+          required: true
           type: string
         - name: Dynamic-Link-Id
           in: header
@@ -2959,7 +2959,7 @@ paths:
         - name: JWS-Signature
           in: header
           description: The header contains JWS Signature of payload body signed with Private Key of the Sender.  The PKI Key pair generation with Developer Dashboard is prerequisite for the Signature Generation.
-          required: false
+          required: true
           type: string
         - name: Dynamic-Link-Id
           in: header
