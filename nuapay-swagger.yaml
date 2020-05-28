@@ -16,7 +16,7 @@ info:
     url: https://docs.nuapay.com/api/images/logo.png
 host: api.nuapay.com
 basePath: /
-schemes: 
+schemes:
   - https
 tags:
   - name: Introduction
