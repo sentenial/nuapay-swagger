@@ -962,8 +962,6 @@ x-tagGroups:
   - name: Change log
     tags:
       - Changelog
-schemes:
-  - http
 paths:
   /accounts:
     post:
