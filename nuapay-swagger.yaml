@@ -12,7 +12,7 @@ info:
     url: https://sentenial.com
   x-logo:
     backgroundColor: '#FFFFFF'
-    url: https://docs.nuapay.com/api/images/logo.png
+    url: https://www.nuapay.com/wp-content/uploads/2018/04/nuapay.svg
 host: api.nuapay.com
 basePath: /
 schemes:
@@ -245,7 +245,7 @@ tags:
       Direct Debit Return | DIRECT_DEBIT_RETURN | DEBIT | Creditor
       Direct Debit Refusal | DIRECT_DEBIT_REFUSAL | DEBIT | Creditor
       Direct Debit Authorized Refund | DIRECT_DEBIT_AUTHORIZED_REFUND | DEBIT | Creditor
-      Direct Debit Unauthorized Refund | DIRECT_DEBIT_AUTHORIZED_REFUND | DEBIT | Creditor
+      Direct Debit Unauthorized Refund | DIRECT_DEBIT_UNAUTHORIZED_REFUND | DEBIT | Creditor
       Outgoing Credit Transfer | OUTGOING_CREDIT_TRANSFER | DEBIT | Creditor
       Availability Fee | AVAILABILITY_FEE | DEBIT | N/A for Fees
       Direct Debit Batch Transactions Fee | DIRECT_DEBIT_BATCH_TRANSACTIONS_FEE | DEBIT | N/A for Fees
@@ -263,6 +263,20 @@ tags:
       Incoming Credit Transfer Fee | INCOMING_CREDIT_TRANSFER_FEE | DEBIT | N/A for Fees
       Credit Transfer Recall Fee | CREDIT_TRANSFER_RECALL_FEE | DEBIT | N/A for Fees
       Overdraft Fee | OVERDRAFT_FEE | DEBIT | N/A for Fees
+      Incoming Faster Payment | INCOMING_FPM_CREDIT_TRANSFER | CREDIT | Debtor
+      Outgoing Faster Payment | OUTGOING_FPS_CREDIT_TRANSFER | DEBIT | Creditor
+      Non-Standard Nuapay Fee | OCX_ADHOC_FEE | DEBIT | N/A for Fees
+      Credit Adjustment | CUSTOMER_ADJUSTMENT_CREDIT | CREDIT | Debtor
+      Debit Adjustment | CUSTOMER_ADJUSTMENT_DEBIT | DEBIT | Creditor
+      SEPA Direct Debit File Export Fee |	SEPA_DIRECT_DEBIT_FILE_EXPORT_FEE |	DEBIT |	N/A for Fees
+      Incoming Instant Credit Transfer Fee | INCOMING_EXPRESS_CREDIT_TRANSFER_FEE | DEBIT | N/A for Fees
+      Outgoing Instant Credit Transfer Fee | OUTGOING_EXPRESS_CREDIT_TRANSFER_FEE | DEBIT | N/A for Fees
+      Incoming Instant Credit Transfer | INCOMING_INSTANT_CREDIT_TRANSFER | CREDIT | Debtor
+      Outgoing Instant Credit Transfer | INSTANT_CREDIT_TRANSFER_OUT | DEBIT | Creditor
+      BACS Mandate File Export Fee | BACS_MANDATE_FILE_EXPORT_FEE | DEBIT | N/A for Fees
+      Own Account Transfer Credit | OWN_ACCOUNT_CREDIT_TRANSFER | CREDIT | Debtor
+      Own Account Transfer Debit | OWN_ACCOUNT_DEBIT_TRANSFER | DEBIT | Creditor
+      Standard Mandate Creation Fee | STANDARD_MANDATE_CREATION_FEE | DEBIT| N/A for Fees
   - name: Balances
     description: Balances endpoints
   - name: Mandates
@@ -1109,8 +1123,9 @@ paths:
                 description: Domestic Account Number is required if IBAN is not provided
                 resourceUri: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+        - MerchantOAuth2: 
+          - admin
+        - MerchantApiKey: []
   /accounts/list:
     post:
       tags:
@@ -1231,8 +1246,9 @@ paths:
                   description: Max page size is exceeded
                   resourceUri: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+        - MerchantOAuth2: 
+          - admin
+        - MerchantApiKey: []
   /accounts/{accountId}:
     get:
       tags:
@@ -1310,8 +1326,9 @@ paths:
               returnDescription: null
               details: null                
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+        - MerchantOAuth2: 
+          - admin
+        - MerchantApiKey: []
   /accounts/{accountId}/subaccounts/list:
     post:
       tags:
@@ -1447,8 +1464,9 @@ paths:
                   description: Max page size is exceeded
                   resourceUri: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /accounts/{accountId}/balances:
     get:
       tags:
@@ -1545,8 +1563,9 @@ paths:
               returnDescription: null
               details: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /accounts/{accountId}/credittransfers/list:
     post:
       tags:
@@ -1698,8 +1717,9 @@ paths:
                 description: "'From Date' must be earlier or equal to 'To Date'"
                 resourceUri: null  
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /accounts/{accountId}/transactions/list:
     post:
       tags: 
@@ -1854,8 +1874,9 @@ paths:
               returnDescription: "Value Date From' must be earlier or equal to 'Value Date To'"
               details: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /accounts/{accountId}/transactions/{transactionId}:
     get:
       tags: 
@@ -1921,8 +1942,9 @@ paths:
       x-sentenial:
         enriched: true
       security:
-      - OriginatorApiKey: []
-      - OriginatorOAuth2: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /beneficiaries:
     get:
       tags:
@@ -1945,10 +1967,6 @@ paths:
           type: string
           description: Name of Beneficiary. Used to filter credit transfers with provided beneficiary name, full and partial names are supported.
           maxLength: 70
-        - name: orderby
-          in: query
-          required: false
-          type: string
         - name: pagenumber
           in: query
           required: false
@@ -2085,8 +2103,9 @@ paths:
               returnDescription: Max page size is exceeded
               details: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
     post:
       tags:
         - Beneficiaries
@@ -2200,8 +2219,9 @@ paths:
               returnDescription: Either Iban or Domestic Account is allowed.
               details: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /beneficiaries/{beneficiaryId}:
     get:
       tags:
@@ -2283,8 +2303,9 @@ paths:
           schema:
             $ref: '#/definitions/ErrorResponse'            
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /beneficiaries/{beneficiaryId}/credittransfers:
     get:
       tags:
@@ -2299,6 +2320,11 @@ paths:
           in: path
           description: Encoded Beneficiary ID of the beneficiary whos credit transfers are to be viewed.
           required: true
+          type: string
+        - name: endtoendid
+          in: query
+          description: Used to filter credit transfers by provided End To End Id.
+          required: false
           type: string
         - name: beneficiaryiban
           in: query
@@ -2511,8 +2537,9 @@ paths:
               returnDescription: "'From Date' must be earlier or equal to 'To Date'"
               details: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
     post:
       tags:
         - Credit Transfers
@@ -2572,6 +2599,7 @@ paths:
                 endToEndId: 12345678901330w4
                 remittanceInformation: Remittance info
                 paymentStatus: READY_FOR_EXPORT
+                settlementDateShift: true              
                 type: EXPRESS
                 paymentScheme: SCT
                 ultimateCreditor: null
@@ -2669,8 +2697,9 @@ paths:
               returnDescription: Invalid Payment Reference
               details: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /beneficiaries/{beneficiaryId}/credittransfers/{creditTransferId}:
     get:
       tags:
@@ -2772,8 +2801,9 @@ paths:
               returnDescription: null
               details: null            
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /credittransfers:
     get:
       tags:
@@ -2784,6 +2814,11 @@ paths:
       produces:
         - application/json
       parameters:
+        - name: endtoendid
+          in: query
+          description: Used to filter credit transfers by provided End To End Id.
+          required: false
+          type: string
         - name: beneficiaryiban
           in: query
           required: false
@@ -2981,8 +3016,9 @@ paths:
               returnDescription: "'From Date' must be earlier or equal to 'To Date'"
               details: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
     post:
       tags:
         - Credit Transfers
@@ -3037,6 +3073,7 @@ paths:
                 endToEndId: 12345678901330w4
                 remittanceInformation: Remittance info
                 paymentStatus: READY_FOR_EXPORT
+                settlementDateShift: true
                 type: STANDARD
                 paymentScheme: SCT
                 ultimateCreditor:
@@ -3156,8 +3193,9 @@ paths:
                 description: 'Originator Account provided does not exist'
                 resourceUri: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /directdebits:
     get:
       tags:
@@ -3168,6 +3206,11 @@ paths:
       produces:
         - application/json
       parameters:
+        - name: endtoendid
+          in: query
+          description: Used to filter direct debits by provided End To End Id.
+          required: false
+          type: string
         - name: actualcollectiondatefrom
           in: query
           required: false
@@ -3313,8 +3356,9 @@ paths:
               returnDescription: "'From Date' must be earlier or equal to 'To Date'"
               details: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /faileddirectdebits:
     get:
       tags:
@@ -3421,8 +3465,9 @@ paths:
               returnDescription: 'Max date range is exceeded'
               details: null    
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /files:
     post:
       tags:
@@ -3518,8 +3563,9 @@ paths:
               returnDescription: Not allowed file format
               details: null             
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /iban/validate:
     post:
       tags:
@@ -3621,8 +3667,9 @@ paths:
               returnDescription: Domestic Account Number is required if IBAN is not provided
               details: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /mandates:
     get:
       tags:
@@ -3789,8 +3836,9 @@ paths:
               returnDescription: "'From Date' must be earlier or equal to 'To Date'"
               details: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /paymentschedules:
     get:
       tags:
@@ -3944,8 +3992,9 @@ paths:
               returnDescription: Max page size is exceeded
               details: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /pendingapprovals/{approvalId}:
     get:
       tags:
@@ -3967,8 +4016,9 @@ paths:
         '501':
           description: Not implemented
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /schemes:
     get:
       tags:
@@ -4021,8 +4071,9 @@ paths:
               returnDescription: null
               details: null          
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /schemes/{schemeId}/directdebits:
     get:
       tags:
@@ -4033,6 +4084,11 @@ paths:
       produces:
         - application/json
       parameters:
+        - name: endtoendid
+          in: query
+          description: Used to filter direct debits by provided End To End Id.
+          required: false
+          type: string
         - name: actualcollectiondatefrom
           in: query
           required: false
@@ -4192,8 +4248,9 @@ paths:
               returnDescription: "'From Date ' must be earlier or equal to 'To Date'"
               details: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
     post:
       tags:
         - Direct Debits
@@ -4326,8 +4383,9 @@ paths:
                 description: The Creditor Account referenced within the file does not exist within the system
                 resourceUri: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /schemes/{schemeId}/mandates:
     get:
       tags:
@@ -4508,8 +4566,9 @@ paths:
               returnDescription: "'From Date' must be earlier or equal to 'To Date'"
               details: null            
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
     post:
       tags:
         - Mandates
@@ -4660,8 +4719,9 @@ paths:
               returnDescription: 'Debtor Account Validation Error'
               details: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /schemes/{schemeId}/mandates/{mandateId}:
     get:
       tags:
@@ -4758,8 +4818,9 @@ paths:
               returnDescription: null
               details: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
     put:
       tags:
         - Mandates
@@ -4900,8 +4961,9 @@ paths:
               returnDescription: 'Debtor Account Validation Error'
               details: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /schemes/{schemeId}/mandates/{mandateId}/activate:
     post:
       tags:
@@ -5040,8 +5102,9 @@ paths:
               returnDescription: The Mandate cannot be Activated from its current state
               details: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /schemes/{schemeId}/mandates/{mandateId}/cancel:
     post:
       tags:
@@ -5177,8 +5240,9 @@ paths:
               returnDescription: Mandate cannot be cancelled from its current state
               details: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /schemes/{schemeId}/mandates/{mandateId}/directdebits:
     get:
       tags:
@@ -5189,6 +5253,11 @@ paths:
       produces:
         - application/json
       parameters:
+        - name: endtoendid
+          in: query
+          description: Used to filter direct debits by provided End To End Id.
+          required: false
+          type: string
         - name: actualcollectiondatefrom
           in: query
           required: false
@@ -5351,8 +5420,9 @@ paths:
               returnDescription: "'From Date' must be earlier or equal to 'To Date'"
               details: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
     post:
       tags:
         - Direct Debits
@@ -5482,8 +5552,9 @@ paths:
               returnDescription: Payment Date is not far enough in the future.
               details: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /schemes/{schemeId}/mandates/{mandateId}/directdebits/{directDebitId}:
     get:
       tags:
@@ -5579,8 +5650,9 @@ paths:
               returnDescription: null
               details: null            
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /schemes/{schemeId}/mandates/{mandateId}/directdebits/{directDebitId}/represent:
     post:
       tags:
@@ -5715,8 +5787,9 @@ paths:
               returnDescription: Mandate is not in a Valid Status
               details: null
       security:
-        - OriginatorApiKey: []
-        - OriginatorOAuth2: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /schemes/{schemeId}/mandates/{mandateId}/directdebits/{directDebitId}/revoke:
     post:
       tags:
@@ -5824,8 +5897,9 @@ paths:
               returnDescription: Direct Debit cannot be revoked as it is not in a valid status
               details: null                
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /schemes/{schemeId}/mandates/{mandateId}/document:
     get:
       tags:
@@ -5890,8 +5964,9 @@ paths:
               returnDescription: null
               details: null            
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
     post:
       tags:
         - Mandates
@@ -6014,8 +6089,9 @@ paths:
               returnDescription: 'The file size exceeds 2MB'
               details: null            
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /schemes/{schemeId}/mandates/{mandateId}/paymentschedules:
     get:
       tags:
@@ -6188,8 +6264,9 @@ paths:
               returnDescription: Max page size is exceeded
               details: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
     post:
       tags:
         - Payment Schedules
@@ -6322,8 +6399,9 @@ paths:
               returnDescription: Payment Date is not far enough in the future
               details: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /schemes/{schemeId}/mandates/{mandateId}/paymentschedules/{paymentScheduleId}/cancel:
     post:
       tags:
@@ -6463,8 +6541,9 @@ paths:
               returnDescription: Payment Schedule cannot be cancelled as it is not in ACTIVE status
               details: null
       security:
-        - OriginatorApiKey: []
-        - OriginatorOAuth2: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /schemes/{schemeId}/mandates/{mandateId}/paymentschedules/{scheduleId}:
     get:
       tags:
@@ -6555,8 +6634,9 @@ paths:
           schema:
             $ref: '#/definitions/ErrorResponse'
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /schemes/{schemeId}/mandates/{mandateId}/revokealldirectdebits:
     post:
       tags:
@@ -6666,8 +6746,9 @@ paths:
               returnDescription: No Direct Debit exists matching information provided
               details: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /schemes/{schemeId}/paymentschedules:
     get:
       tags:
@@ -6833,8 +6914,9 @@ paths:
               returnDescription: Max page size is exceeded
               details: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
     post:
       tags:
         - Payment Schedules
@@ -6967,8 +7049,9 @@ paths:
               returnDescription: Payment Date is not far enough in the future
               details: null
       security:
-      - OriginatorOAuth2: []
-      - OriginatorApiKey: []
+      - MerchantOAuth2:
+        - admin
+      - MerchantApiKey: []
   /transfers:
     post:
       tags:
@@ -7096,17 +7179,18 @@ paths:
                 description: The Execution Date must be set to today's date.
                 resourceUri: null
       security:
-        - OriginatorOAuth2: []
-        - OriginatorApiKey: []
+        - MerchantOAuth2:
+          - admin
+        - MerchantApiKey: []
 securityDefinitions:
-  OriginatorApiKey:
+  MerchantApiKey:
     type: basic
-  OriginatorOAuth2:
+  MerchantOAuth2:
     type: oauth2
     tokenUrl: https://api.nuapay.com/oauth/token_key
     flow: password
     scopes:
-      ui: Authentication with username and password
+      admin: Nuapay API Access
 definitions:
   Account:
     type: object
@@ -7357,6 +7441,9 @@ definitions:
         type: string
         format: date
         description: Requested Execution Date for the credit transfer. If not provided it will be set to the current processing date.
+      settlementDateShift:
+        type: boolean
+        description: If true, settlement date shift logic is applied and requestedCollectionDate can be shifted and returned as actualExecutionDate.        
       type:
         type: string
         description: Type of Credit Transfer. Determine which of available execution options (payment schemes) will be used to process the transfer. Note that standard payment scheme is always available. Other schemes will be used only when available. Response payment scheme determine which scheme was actually used to process the payment.
@@ -7376,6 +7463,7 @@ definitions:
       paymentCurrency: EUR
       endToEndId: 12345678901330w4
       remittanceInformation: Remittance info
+      settlementDateShift: true      
       type: STANDARD
       beneficiary:
         name: Beneficiary Name
@@ -7441,6 +7529,9 @@ definitions:
         type: string
         format: date
         description: 'Requested Execution Date for the credit transfer. If not provided it will be set to the current processing date. In format YYYY-MM-DD'
+      settlementDateShift:
+        type: boolean
+        description: If true, settlement date shift logic is applied and requestedCollectionDate can be shifted and returned as actualCollectionDate.        
       type:
         type: string
         default: STANDARD
@@ -7465,6 +7556,7 @@ definitions:
       paymentCurrency: EUR
       endToEndId: 12345678901330w4
       remittanceInformation: Remittance info
+      settlementDateShift: true      
   AddSinglePaymentMOTFRequestEntity:
     type: object
     required:
@@ -9102,6 +9194,9 @@ definitions:
         type: string
         format: date
         description: The actual execution date of the credit transfer, this can be different to the requested execution date if settlement date shift is applied
+      settlementDateShift:
+        type: boolean
+        description: If true, settlement date shift logic was applied to the credit transfer        
       type:
         type: string
         description: Requested Credit Transfer type.
@@ -9116,6 +9211,8 @@ definitions:
         $ref: '#/definitions/UltimatePartyEntity'
       ultimateDebtor:
         $ref: '#/definitions/UltimatePartyEntity'
+      rejectDetails:
+        $ref: '#/definitions/RejectDetailsResponse'
   RestResponseEnvelopeInnerOfCreditorSchemeResponseEntity:
     type: object
     properties:
