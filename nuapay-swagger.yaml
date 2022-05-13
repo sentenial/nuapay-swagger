@@ -7444,6 +7444,8 @@ definitions:
       settlementDateShift:
         type: boolean
         description: If true, settlement date shift logic is applied and requestedCollectionDate can be shifted and returned as actualExecutionDate.        
+      structuredRemittanceInformation:
+        $ref: '#/definitions/StructuredRemittanceInformation'
       type:
         type: string
         description: Type of Credit Transfer. Determine which of available execution options (payment schemes) will be used to process the transfer. Note that standard payment scheme is always available. Other schemes will be used only when available. Response payment scheme determine which scheme was actually used to process the payment.
@@ -7532,6 +7534,8 @@ definitions:
       settlementDateShift:
         type: boolean
         description: If true, settlement date shift logic is applied and requestedCollectionDate can be shifted and returned as actualCollectionDate.        
+      structuredRemittanceInformation:
+        $ref: '#/definitions/StructuredRemittanceInformation'
       type:
         type: string
         default: STANDARD
@@ -8989,6 +8993,8 @@ definitions:
       unstructuredRemittanceInformation:
         type: string
         description: Related Transaction remittance information
+      structuredRemittanceInformation:
+        $ref: '#/definitions/StructuredRemittanceInformation'
       uri:
         type: string
         description: resource Uri
@@ -9197,6 +9203,8 @@ definitions:
       settlementDateShift:
         type: boolean
         description: If true, settlement date shift logic was applied to the credit transfer        
+      structuredRemittanceInformation:
+        $ref: '#/definitions/StructuredRemittanceInformation'
       type:
         type: string
         description: Requested Credit Transfer type.
@@ -9941,6 +9949,8 @@ definitions:
         bulkMessageId: null
         batchReference: null
         unstructuredRemittanceInformation: unstructuredRemittanceInformation
+        structuredRemittanceInformation:
+          creditorReference: reference
         remittanceInfo: remittanceInfo
         schemeType: null
         numberOfTransactions: null
@@ -10127,3 +10137,10 @@ definitions:
       uri:
         type: string
         description: URI of file resource created.
+  StructuredRemittanceInformation:
+    type: object
+    description: Structured remittance information. 
+    properties:
+      creditorReference:
+        type: string
+        maxLength: 35 
