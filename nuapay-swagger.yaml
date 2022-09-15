@@ -785,8 +785,12 @@ tags:
       * Output Encoding Rules are applied to some services and will be applied to all services in the future.
   - name: Changelog
     description: |-
+      ## 2022-05-13
+      * Added structuredRemittanceInformation object to 'Create Credit Transfer' and 'Transaction' objects.
+      
       ## 2021-01-04
       * Added missing error codes.
+      
       ## 2018-07-27 
       * Introduced new 422 error codes, 7148, 7152, 7153 and 7154, for 'Create Credit Transfer' and 'Create Credit Transfer and Beneficiary' endpoints. 
 
@@ -1027,6 +1031,14 @@ paths:
           description: JWS-Signature
           required: false
           type: string
+        - name: Idempotency-Key
+          in: header
+          x-sentenial:
+            enriched: "true"
+          description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
+          required: false
+          type: string
+          maxLength: 50    
         - in: body
           name: addAccountRequest
           description: addAccountRequest
@@ -1144,6 +1156,14 @@ paths:
         description: JWS-Signature
         required: false
         type: string
+      - name: Idempotency-Key
+        in: header
+        x-sentenial:
+          enriched: "true"
+        description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
+        required: false
+        type: string
+        maxLength: 50  
       - in: body
         name: listAccountRequest
         description: listAccountRequest
@@ -1349,6 +1369,14 @@ paths:
         description: JWS-Signature
         required: false
         type: string
+      - name: Idempotency-Key
+        in: header
+        x-sentenial:
+          enriched: "true"
+        description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
+        required: false
+        type: string
+        maxLength: 50  
       - name: accountId
         in: path
         description: accountId
@@ -1587,6 +1615,14 @@ paths:
         description: JWS-Signature
         required: false
         type: string
+      - name: Idempotency-Key
+        in: header
+        x-sentenial:
+          enriched: "true"
+        description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
+        required: false
+        type: string
+        maxLength: 50  
       - name: accountId
         in: path
         description: Encoded Account Id of the account to list credit transfers from.
@@ -1740,6 +1776,14 @@ paths:
         description: JWS-Signature
         required: false
         type: string
+      - name: Idempotency-Key
+        in: header
+        x-sentenial:
+          enriched: "true"
+        description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
+        required: false
+        type: string
+        maxLength: 50  
       - name: accountId
         in: path
         description: Encoded Account Id of the account whos transactions are to be viewed.        
@@ -2122,6 +2166,14 @@ paths:
         description: JWS-Signature
         required: true
         type: string
+      - name: Idempotency-Key
+        in: header
+        x-sentenial:
+          enriched: "true"
+        description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
+        required: false
+        type: string
+        maxLength: 50  
       - in: body
         name: addBeneficiaryRequest
         description: |-
@@ -2418,6 +2470,7 @@ paths:
                   paymentCurrency: EUR
                   endToEndId: 12345678901330w4
                   remittanceInformation: Remittance info
+                  structuredRemittanceInformation: null
                   paymentStatus: READY_FOR_EXPORT
                   type: EXPRESS
                   paymentScheme: SCT
@@ -2452,6 +2505,7 @@ paths:
                   paymentCurrency: EUR
                   endToEndId: abcdefghij1234
                   remittanceInformation: Remittance info
+                  structuredRemittanceInformation: null
                   paymentStatus: READY_FOR_EXPORT
                   type: STANDARD
                   paymentScheme: SCT
@@ -2561,6 +2615,14 @@ paths:
           description: Optional header used to provide additional information for SCA.
           required: false
           type: string        
+        - name: Idempotency-Key
+          in: header
+          x-sentenial:
+           enriched: "true"
+          description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
+          required: false
+          type: string
+          maxLength: 50  
         - in: body
           name: addCreditTransferRequest
           description: addCreditTransferRequest
@@ -2598,6 +2660,7 @@ paths:
                 paymentCurrency: EUR
                 endToEndId: 12345678901330w4
                 remittanceInformation: Remittance info
+                structuredRemittanceInformation: null
                 paymentStatus: READY_FOR_EXPORT
                 settlementDateShift: true              
                 type: EXPRESS
@@ -2746,6 +2809,7 @@ paths:
                 paymentCurrency: EUR
                 endToEndId: 12345678901330w4
                 remittanceInformation: Remittance info
+                structuredRemittanceInformation: null
                 paymentStatus: READY_FOR_EXPORT
                 type: EXPRESS
                 paymentScheme: SCT
@@ -2912,6 +2976,7 @@ paths:
                   paymentCurrency: EUR
                   endToEndId: 12345678901330w4
                   remittanceInformation: Remittance info
+                  structuredRemittanceInformation: null
                   paymentStatus: READY_FOR_EXPORT
                   type: EXPRESS
                   paymentScheme: SCT
@@ -3040,6 +3105,14 @@ paths:
           description: Optional header used to provide additional information for SCA.
           required: false
           type: string   
+        - name: Idempotency-Key
+          in: header
+          x-sentenial:
+            enriched: "true"
+          description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
+          required: false
+          type: string
+          maxLength: 50     
         - in: body
           name: addCTBeneficiaryOnFlyRequest
           description: addCTBeneficiaryOnFlyRequest
@@ -3072,6 +3145,7 @@ paths:
                 paymentCurrency: EUR
                 endToEndId: 12345678901330w4
                 remittanceInformation: Remittance info
+                structuredRemittanceInformation: null
                 paymentStatus: READY_FOR_EXPORT
                 settlementDateShift: true
                 type: STANDARD
@@ -3485,6 +3559,14 @@ paths:
           description: JWS-Signature
           required: false
           type: string  
+        - name: Idempotency-Key
+          in: header
+          x-sentenial:
+            enriched: "true"
+          description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
+          required: false
+          type: string
+          maxLength: 50     
         - name: file
           in: formData
           description: file
@@ -3588,6 +3670,14 @@ paths:
           description: JWS-Signature
           required: false
           type: string
+        - name: Idempotency-Key
+          in: header
+          x-sentenial:
+            enriched: "true"
+          description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
+          required: false
+          type: string
+          maxLength: 50     
         - in: body
           name: validationRequest
           description: validationRequest
@@ -4267,6 +4357,14 @@ paths:
           description: JWS-Signature
           required: false
           type: string
+        - name: Idempotency-Key
+          in: header
+          x-sentenial:
+            enriched: "true"
+          description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
+          required: false
+          type: string
+          maxLength: 50     
         - in: body
           name: addSinglePaymentRequest
           description: addSinglePaymentRequest
@@ -4589,6 +4687,14 @@ paths:
           description: JWS-Signature
           required: false
           type: string
+        - name: Idempotency-Key
+          in: header
+          x-sentenial:
+            enriched: "true"
+          description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
+          required: false
+          type: string
+          maxLength: 50     
         - in: body 
           name: mandateRequest
           description: mandateRequest
@@ -4842,6 +4948,14 @@ paths:
           description: JWS-Signature
           required: false
           type: string
+        - name: Idempotency-Key
+          in: header
+          x-sentenial:
+            enriched: "true"
+          description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
+          required: false
+          type: string
+          maxLength: 50     
         - name: mandateId
           in: path
           description: Encoded Mandate ID of the mandate to be updated
@@ -4984,6 +5098,14 @@ paths:
           description: JWS-Signature
           required: false
           type: string
+        - name: Idempotency-Key
+          in: header
+          x-sentenial:
+            enriched: "true"
+          description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
+          required: false
+          type: string
+          maxLength: 50     
         - in: body
           name: mandateActivateRequest
           required: true
@@ -5122,6 +5244,14 @@ paths:
           description: JWS-Signature
           required: false
           type: string
+        - name: Idempotency-Key
+          in: header
+          x-sentenial:
+            enriched: "true"
+          description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
+          required: false
+          type: string
+          maxLength: 50     
         - name: mandateId
           in: path
           description: Encoded Mandate ID of the mandate to be updated
@@ -5439,6 +5569,14 @@ paths:
           description: JWS-Signature
           required: false
           type: string
+        - name: Idempotency-Key
+          in: header
+          x-sentenial:
+            enriched: "true"
+          description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
+          required: false
+          type: string
+          maxLength: 50     
         - in: body
           name: addSinglePaymentRequest
           description: addSinglePaymentRequest
@@ -5670,6 +5808,14 @@ paths:
           description: JWS-Signature
           required: false
           type: string
+        - name: Idempotency-Key
+          in: header
+          x-sentenial:
+            enriched: "true"
+          description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
+          required: false
+          type: string
+          maxLength: 50     
         - name: directDebitId
           in: path
           description: Encoded Direct Debit ID of the Direct Debit to be retrieved.
@@ -5807,6 +5953,14 @@ paths:
           description: JWS-Signature
           required: false
           type: string
+        - name: Idempotency-Key
+          in: header
+          x-sentenial:
+            enriched: "true"
+          description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
+          required: false
+          type: string
+          maxLength: 50     
         - name: directDebitId
           in: path
           description: Encoded Direct Debit ID of the direct debit to be revoked.
@@ -5993,6 +6147,14 @@ paths:
           description: JWS-Signature
           required: false
           type: string
+        - name: Idempotency-Key
+          in: header
+          x-sentenial:
+            enriched: "true"
+          description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
+          required: false
+          type: string
+          maxLength: 50     
         - name: file
           in: formData
           description: file
@@ -6286,6 +6448,14 @@ paths:
           description: JWS-Signature
           required: false
           type: string
+        - name: Idempotency-Key
+          in: header
+          x-sentenial:
+            enriched: "true"
+          description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
+          required: false
+          type: string
+          maxLength: 50     
         - name: mandateId
           in: path
           description: Encoded Mandate ID of the mandate the payment schedule will be associated to.
@@ -6423,6 +6593,14 @@ paths:
           description: JWS-Signature          
           required: false
           type: string
+        - name: Idempotency-Key
+          in: header
+          x-sentenial:
+            enriched: "true"
+          description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
+          required: false
+          type: string
+          maxLength: 50     
         - in: body
           name: cancelPaymentScheduleEntity
           description: cancelPaymentScheduleEntity
@@ -6654,6 +6832,14 @@ paths:
           description: JWS-Signature
           required: false
           type: string
+        - name: Idempotency-Key
+          in: header
+          x-sentenial:
+            enriched: "true"
+          description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
+          required: false
+          type: string
+          maxLength: 50     
         - name: mandateId
           in: path
           description: Encoded Mandate ID of the mandate who's direct debit(s) are to be revoked.
@@ -6936,6 +7122,14 @@ paths:
           description: JWS-Signature
           required: false
           type: string
+        - name: Idempotency-Key
+          in: header
+          x-sentenial:
+            enriched: "true"
+          description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
+          required: false
+          type: string
+          maxLength: 50     
         - in: body
           name: paymentScheduleEntity
           description: paymentScheduleEntity
@@ -7069,6 +7263,14 @@ paths:
         description: JWS-Signature
         required: false
         type: string
+      - name: Idempotency-Key
+        in: header
+        x-sentenial:
+            enriched: "true"
+        description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
+        required: false
+        type: string
+        maxLength: 50   
       - in: body
         name: transfersRequest
         description: transfersRequest
