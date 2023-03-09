@@ -10259,11 +10259,11 @@ definitions:
       valueDateFrom:
         type: integer
         format: int64
-        description: 'Value Date From, Format: timestamp'
+        description: 'Value Date From, Format: timestamp - milliseconds since the UNIX epoch (January 1, 1970 00:00:00 UTC)'
       valueDateTo:
         type: integer
         format: int64
-        description: 'Value Date To, Format: timestamp'
+        description: 'Value Date To, Format: timestamp - milliseconds since the UNIX epoch (January 1, 1970 00:00:00 UTC)'
   TransfersRequest:
     type: object
     required:
