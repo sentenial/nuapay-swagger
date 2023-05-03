@@ -1141,7 +1141,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -1286,7 +1286,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -1383,7 +1383,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -1544,7 +1544,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -1659,7 +1659,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -1848,7 +1848,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -2029,7 +2029,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -2113,7 +2113,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -2290,7 +2290,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -2430,7 +2430,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -2530,7 +2530,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -2808,7 +2808,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -3006,7 +3006,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -3140,7 +3140,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -3397,7 +3397,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -3612,7 +3612,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -3791,7 +3791,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -3916,7 +3916,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -4038,7 +4038,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -4166,7 +4166,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -4351,7 +4351,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -4523,7 +4523,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -4794,7 +4794,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -4953,7 +4953,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -5152,7 +5152,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -5332,7 +5332,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -5447,7 +5447,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -5614,7 +5614,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -5779,7 +5779,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -5941,7 +5941,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -6137,7 +6137,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -6293,7 +6293,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -6407,7 +6407,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -6568,7 +6568,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -6702,7 +6702,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -6785,7 +6785,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -6934,7 +6934,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -7125,7 +7125,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -7284,7 +7284,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -7450,7 +7450,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -7559,7 +7559,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -7695,7 +7695,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -7879,7 +7879,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -8038,7 +8038,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
@@ -8192,7 +8192,7 @@ paths:
             X-Rate-Limit-Reset:
               type: integer
               format: int32
-              description: Number in milliseconds to wait before retrying request.
+              description: Number in seconds to wait before retrying request.
           schema:
             $ref: '#/definitions/ErrorResponse'
           examples:
