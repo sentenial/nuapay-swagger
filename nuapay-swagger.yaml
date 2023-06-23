@@ -268,7 +268,7 @@ tags:
       Non-Standard Nuapay Fee | OCX_ADHOC_FEE | DEBIT | N/A for Fees
       Credit Adjustment | CUSTOMER_ADJUSTMENT_CREDIT | CREDIT | Debtor
       Debit Adjustment | CUSTOMER_ADJUSTMENT_DEBIT | DEBIT | Creditor
-      SEPA Direct Debit File Export Fee |	SEPA_DIRECT_DEBIT_FILE_EXPORT_FEE |	DEBIT |	N/A for Fees
+      SEPA Direct Debit File Export Fee |SEPA_DIRECT_DEBIT_FILE_EXPORT_FEE |	DEBIT |	N/A for Fees
       Incoming Instant Credit Transfer Fee | INCOMING_EXPRESS_CREDIT_TRANSFER_FEE | DEBIT | N/A for Fees
       Outgoing Instant Credit Transfer Fee | OUTGOING_EXPRESS_CREDIT_TRANSFER_FEE | DEBIT | N/A for Fees
       Incoming Instant Credit Transfer | INCOMING_INSTANT_CREDIT_TRANSFER | CREDIT | Debtor
@@ -786,6 +786,9 @@ tags:
       * Output Encoding Rules are applied to some services and will be applied to all services in the future.
   - name: Changelog
     description: |-
+      ## 2023-05-13
+      * Added holdingBank object to 'Validate Accounts' reponse
+      
       ## 2022-05-13
       * Added structuredRemittanceInformation object to 'Create Credit Transfer' and 'Transaction' objects.
       
@@ -1065,7 +1068,7 @@ paths:
                   iban: GB35SELN00999903769154
                   domesticAccountNumber: "03769154"
                   domesticBankCode: null
-                  domesticBranchCode: 009999
+                  domesticBranchCode: "009999"
                   domesticCheckSum: null
                   domesticAccountCountry: GB
                   bic: GENODESELNGB21XXXF1P17
@@ -1204,7 +1207,7 @@ paths:
                     iban: GB35SELN00999903769154
                     domesticAccountNumber: "03769154"
                     domesticBankCode: null
-                    domesticBranchCode: 009999
+                    domesticBranchCode: "009999"
                     domesticAccountChecksum: null
                     domesticAccountCountry: GB
                     bic: SELNGB21XXX
@@ -1333,7 +1336,7 @@ paths:
                   iban: GB35SELN00999903769154
                   domesticAccountNumber: "03769154"
                   domesticBankCode: null
-                  domesticBranchCode: 009999
+                  domesticBranchCode: "009999"
                   domesticAccountChecksum: null
                   domesticAccountCountry: GB
                   bic: SELNGB21
@@ -1453,7 +1456,7 @@ paths:
                     iban: GB35SELN00999903769154
                     domesticAccountNumber: "03769154"
                     domesticBankCode: null
-                    domesticBranchCode: 009999
+                    domesticBranchCode: "009999"
                     domesticAccountChecksum: null
                     domesticAccountCountry: GB
                     bic: SELNGB21XXX
@@ -1746,7 +1749,7 @@ paths:
                     iban: GB47SELN00999912345678
                     domesticAccountNumber: "12345678"
                     domesticBankCode: null
-                    domesticBranchCode: 009999
+                    domesticBranchCode: "009999"
                     domesticCheckSum: null
                     domesticAccountCountry: GB
                     bic: SELNGB21
@@ -2195,7 +2198,7 @@ paths:
                     bic: SELNGB21
                     domesticAccountNumber: "12345678"
                     domesticBankCode: null
-                    domesticBranchCode: 009999
+                    domesticBranchCode: "009999"
                     domesticCheckSum: null
                     domesticAccountCountry: GB
                 - id: abxq9jak2l
@@ -2219,7 +2222,7 @@ paths:
                     bic: SELNGB21
                     domesticAccountNumber: "12345678"
                     domesticBankCode: null
-                    domesticBranchCode: 009999
+                    domesticBranchCode: "009999"
                     domesticCheckSum: null
                     domesticAccountCountry: GB
               page:
@@ -2364,7 +2367,7 @@ paths:
                   bic: SELNGB21
                   domesticAccountNumber: "12345678"
                   domesticBankCode: null
-                  domesticBranchCode: 009999
+                  domesticBranchCode: "009999"
                   domesticCheckSum: null
                   domesticAccountCountry: GB
                 links: []
@@ -2487,7 +2490,7 @@ paths:
                   bic: SELNGB21
                   domesticAccountNumber: "12345678"
                   domesticBankCode: null
-                  domesticBranchCode: 009999
+                  domesticBranchCode: "009999"
                   domesticCheckSum: null
                   domesticAccountCountry: GB
                 links: []
@@ -2665,7 +2668,7 @@ paths:
                     iban: GB47SELN00999912345678
                     domesticAccountNumber: "12345678"
                     domesticBankCode: null
-                    domesticBranchCode: 009999
+                    domesticBranchCode: "009999"
                     domesticCheckSum: null
                     domesticAccountCountry: GB
                     bic: SELNGB21
@@ -2713,7 +2716,7 @@ paths:
                     iban: GB47SELN00999912345678
                     domesticAccountNumber: "12345678"
                     domesticBankCode: null
-                    domesticBranchCode: 009999
+                    domesticBranchCode: "009999"
                     domesticCheckSum: null
                     domesticAccountCountry: GB
                     bic: SELNGB21
@@ -2898,7 +2901,7 @@ paths:
                   iban: GB47SELN00999912345678
                   domesticAccountNumber: "12345678"
                   domesticBankCode: null
-                  domesticBranchCode: 009999
+                  domesticBranchCode: "009999"
                   domesticCheckSum: null
                   domesticAccountCountry: GB
                   bic: SELNGB21
@@ -3075,7 +3078,7 @@ paths:
                   iban: GB47SELN00999912345678
                   domesticAccountNumber: "12345678"
                   domesticBankCode: null
-                  domesticBranchCode: 009999
+                  domesticBranchCode: "009999"
                   domesticCheckSum: null
                   domesticAccountCountry: GB
                   bic: SELNGB21
@@ -3270,7 +3273,7 @@ paths:
                     iban: GB47SELN00999912345678
                     domesticAccountNumber: "12345678"
                     domesticBankCode: null
-                    domesticBranchCode: 009999
+                    domesticBranchCode: "009999"
                     domesticCheckSum: null
                     domesticAccountCountry: GB
                     bic: SELNGB21
@@ -3317,7 +3320,7 @@ paths:
                     iban: GB47SELN00999912345678
                     domesticAccountNumber: "12345678"
                     domesticBankCode: null
-                    domesticBranchCode: 009999
+                    domesticBranchCode: "009999"
                     domesticCheckSum: null
                     domesticAccountCountry: GB
                     bic: SELNGB21
@@ -3495,7 +3498,7 @@ paths:
                   iban: GB47SELN00999912345678
                   domesticAccountNumber: "12345678"
                   domesticBankCode: null
-                  domesticBranchCode: 009999
+                  domesticBranchCode: "009999"
                   domesticCheckSum: null
                   domesticAccountCountry: GB
                   bic: SELNGB21
@@ -4100,9 +4103,21 @@ paths:
                 domesticAccountNumber: "03769154"
                 accountCountry: GB
                 domesticBankCode: null
-                domesticBranchCode: 009999
+                domesticBranchCode: "009999"
                 domesticCheckSum: null
                 bic: SELNGB21XXX
+                holdingBank:
+                  institutionName: SENTENIAL LTD
+                  branchName: Sentenial Ltd T/A Nuapay
+                  address:
+                    line1: 4th Floor
+                    line2: 35 Great St Helen's
+                    line3: London
+                    postCode: EC3A 6AP
+                  telephoneNumber: 0203 1788729
+                  faxNumber: null
+                  closureDate: null
+                  redirectedTo: null
                 links: []
         400:
           description: Bad request
@@ -4155,9 +4170,17 @@ paths:
             $ref: "#/definitions/ErrorResponse"
           examples:
             application/json:
-              returnCode: "7075"
-              returnDescription: Domestic Account Number is required if IBAN is not provided
-              details: null
+              returnCode: '7136'
+              returnDescription: Account Validation Error
+              details:
+              - code: W0002
+                description: Modulus check algorithm is unavailable for these account details
+                field: iban
+                resourceUri:
+              - code: E0006
+                description: Sort code is not allocated
+                resourceUri:
+                field: iban
         429:
           description: Too Many Requests
           x-sentenial:
@@ -8100,7 +8123,7 @@ paths:
                   domesticAccountNumber: 03769154
                   domesticAccountCountry: GB
                   domesticBankCode: null
-                  domesticBranchCode: 009999
+                  domesticBranchCode: "009999"
                   domesticCheckSum: 35
                   iban: GB35SELN00999903769154
                   bic: SELNGB21
@@ -8108,7 +8131,7 @@ paths:
                   domesticAccountNumber: 23882374
                   domesticAccountCountry: GB
                   domesticBankCode: null
-                  domesticBranchCode: 009999
+                  domesticBranchCode: "009999"
                   domesticCheckSum: 20
                   iban: GB20SELN00999923882374
                   bic: SELNGB21
@@ -8328,6 +8351,35 @@ definitions:
         type: string
         pattern: "[a-zA-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}"
         description: Account IBAN
+  AccountHoldingInstitution:
+    type: object
+    properties: 
+      institutionName:
+        type: string
+      branchName:
+        type: string
+      address:
+        $ref: "#/definitions/AccountHoldingInstitutionAddress"
+      telephoneNumber:
+        type: string
+      faxNumber:
+        type: string
+      closureDate:
+        type: string
+        format: date
+      redirectedTo:
+        type: string
+  AccountHoldingInstitutionAddress:
+      type: object
+      properties: 
+        line1:
+         type: string
+        line2:
+          type: string
+        line3:
+          type: string
+        postCode:
+          type: string
   AccountValidationRestEntity:
     type: object
     properties:
@@ -10127,6 +10179,8 @@ definitions:
         type: string
         pattern: "[a-zA-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}"
         description: Account IBAN
+      holdingBank:
+        $ref: "#/definitions/AccountHoldingInstitution"
       links:
         type: array
         items:
