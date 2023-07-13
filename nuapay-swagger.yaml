@@ -3694,6 +3694,7 @@ paths:
             - REFUNDED
             - CANCELLED
             - PENDING
+            - PENDING_SETTLEMENT
             - REPRESENTED
           description: A number of statuses can be queried within single request by providing multiple occurance of the parameter.
         - name: scheduleid
@@ -4703,6 +4704,7 @@ paths:
             - REFUNDED
             - CANCELLED
             - PENDING
+            - PENDING_SETTLEMENT
             - REPRESENTED
           description: A number of statuses can be queried within single request by providing multiple occurance of the parameter.
         - name: scheduleid
@@ -6046,6 +6048,7 @@ paths:
             - REFUNDED
             - CANCELLED
             - PENDING
+            - PENDING_SETTLEMENT
             - REPRESENTED
           description: A number of statuses can be queried within single request by providing multiple occurance of the parameter.
         - name: scheduleid
@@ -9123,6 +9126,7 @@ definitions:
           - REFUNDED
           - CANCELLED
           - PENDING
+          - PENDING_SETTLEMENT
           - REPRESENTED
       remittanceInfo:
         type: string
@@ -9280,6 +9284,8 @@ definitions:
             - RECALLED
             - EXPORTED
             - ACCEPTED
+            - PENDING
+            - PENDING_SETTLEMENT
         description: List of statuses to filter for. To search for all statuses do not provide the 'paymentStatuses' parameter.
   ListCreditTransferPostRequestEntity:
     type: object
@@ -10256,6 +10262,7 @@ definitions:
           - REFUNDED
           - CANCELLED
           - PENDING
+          - PENDING_SETTLEMENT
           - REPRESENTED
       rejectDetails:
         $ref: "#/definitions/RejectDetailsResponse"
@@ -10331,6 +10338,8 @@ definitions:
           - RECALLED
           - EXPORTED
           - ACCEPTED
+          - PENDING
+          - PENDING_SETTLEMENT
       remittanceInformation:
         type: string
         description: Remmittance Information
@@ -10819,6 +10828,7 @@ definitions:
           - REFUNDED
           - CANCELLED
           - PENDING
+          - PENDING_SETTLEMENT
           - REPRESENTED
       rejectDetails:
         $ref: "#/definitions/RejectDetailsResponse"
@@ -10939,6 +10949,7 @@ definitions:
           - REFUNDED
           - CANCELLED
           - PENDING
+          - PENDING_SETTLEMENT
           - REPRESENTED
       rejectDetails:
         $ref: "#/definitions/RejectDetailsResponse"
