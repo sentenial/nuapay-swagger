@@ -25,8 +25,6 @@ tags:
 
       For Direct Debits once you have been configured with a Creditor Scheme ID just add the mandate, add the Direct Debit or Direct Debit Schedule and watch your payments come in.  If you're new to Direct Debits refer to our <a href = 'https://sentenial.github.io/developer-docs/np_landing_page.html' target='_blank' >Developer Documentation</a> for an overview of the Direct Debit process.
 
-      For Credit Transfers, add the Beneficiary then add the Credit Transfer and your payment is sent out.  If you're new to Credit Transfers refer to this <a href= 'https://sentenial.github.io/developer-docs/np_ctoverview.html' target='_blank' >Credit Transfer Payments Overview</a>.
-
   - name: Getting Started
     description: |-
 
@@ -102,10 +100,6 @@ tags:
       a customer private key and X.509 certificate issued by Nuapay.
 
       For details on how to generate a private key and obtaining an X.509 certificate see the security section of the <a href = 'https://sentenial.github.io/developer-docs/np_secjwsgenerator.html' target='_blank'>Developer Resource</a> pages.
-
-      The JWS-signature is required when using the following POST / PUT endpoints,
-      * Create Beneficiary
-      * Create Credit Transfer
 
       Optionally the JWS-signature can also be applied to the following POST / PUT endpoints,
       * Create Mandate
@@ -289,19 +283,6 @@ tags:
       * `mandateId`, is the Mandate resource ID returned by a variety of mandate services including: [Create Mandate](#operation/addMandateUsingPOST), [List Organization Mandates](#operation/listOrganizationMandatesUsingGET),[List Scheme Mandates](#operation/listSchemeMandatesUsingGET), [Retrieve Mandate](#operation/viewMandateUsingGET)
   - name: Other
     description: Other endpoints
-  - name: Credit Transfers
-    description: |-
-      Credit tranfers are the financial transactions associated to the beneficiary.
-
-      To access credit transfers use the following URL:
-
-      `https://api.nuapay.com/beneficiaries/{beneficiaryId}/credittransfers/{creditTransferId}`
-
-      where
-
-       * `beneficiaryId`, is the Beneficiary resource ID returned by a variety of beneficiary services including: [Create Beneficiary](#operation/addBeneficiaryUsingPOST), [List Beneficiaries](#operation/listBeneficiariesUsingGET), [Retrieve Beneficiary](#operation/viewBeneficiaryUsingGET)
-
-      * `creditTransferId`, is the Credit Transfer resource ID returned by a variety of credit transfers services including: [Create Credit Transfer](#operation/addCreditTransferUsingPOST), [Retrieve Credit Transfer](#operation/viewCreditTransferUsingGET)
   - name: Direct Debits
     description: |-
       Direct debits are the financial transactions associated to the mandate.
@@ -338,17 +319,6 @@ tags:
     description: A `POST` request used to upload a file. A request must contain the `multipart/form-data` content type with a `json` part containing input parameters in a JSON structure and a `file` part with file content.
   - name: Accounts
     description: Accounts endpoints
-  - name: Beneficiaries
-    description: |-
-      Beneficiaries are the Credit Transfer receivers, also known as the payees or creditors. They enable the funds transfer from the debtor's (Originator/Merchant) account to a creditor's account via Credit Transfer.
-
-      To access a beneficiary use the following URL:
-
-      `https://api.nuapay.com/beneficiaries/{beneficiaryId}`
-
-      where
-
-      `beneficiaryId`, is the resource ID returned by [List Beneficiaries](#operation/listBeneficiariesUsingGET)
   - name: Validate Accounts
     description: Validate Accounts endpoints
   - name: About Responses
@@ -462,20 +432,8 @@ tags:
       4042 | Mandate is not in a Valid Status <em>[Create direct debit](#operation/addSinglePaymentUsingPOST), [Create payment schedule](#operation/addPaymentScheduleUsingPOST), [Represent DD](#operation/representDirectDebitUsingPOST)</em>
       4043 | No Direct Debit exists in a valid status <em>[Revoke all direct debits](#operation/revokeAllDirectDebitsUsingPOST)</em>
       4048 | Payment Custom Frequency must be provided if Payment Schedule Frequency is set to CUSTOM <em>[Create payment schedule and mandate](#operation/addPaymentScheduleUsingPOST_1)</em>
-      5001 | Invalid Beneficiary Account Details <em>[Create beneficiary](#operation/addBeneficiaryUsingPOST), [Create credit transfer](#operation/addCreditTransferUsingPOST)</em>
-      5002 | Duplicate Beneficiary Account Details Provided <em>[Create beneficiary](#operation/addBeneficiaryUsingPOST)</em>
-      5004 | Beneficiary Country Required if any other Address element is provided <em>[Create beneficiary](#operation/addBeneficiaryUsingPOST)</em>
-      5005 | Invalid Beneficiary e-mail address provided <em>[Create beneficiary](#operation/addBeneficiaryUsingPOST)</em>
-      5006 | Payment Amount Invalid  <em>[Create credit transfer](#operation/addCreditTransferUsingPOST)</em>
-      5007 | Originator Account provided does not exist  <em>[Create credit transfer](#operation/addCreditTransferUsingPOST)</em>
-      5008 | Invalid Payment Reference  <em>[Create credit transfer](#operation/addCreditTransferUsingPOST)</em>
-      5009 | Invalid Date for Payment  <em>[Create credit transfer](#operation/addCreditTransferUsingPOST)</em>
-      5014 | Transfer Failed. Please try again later <em>[Create credit transfer](#operation/addCreditTransferUsingPOST)</em>
-      5015 | Transfer Failed. Please contact support <em>[Create credit transfer](#operation/addCreditTransferUsingPOST)</em>
-      5016 | Insufficient Funds <em>[Create credit transfer](#operation/addCreditTransferUsingPOST)</em>
-      5017 | Originator account currency does not match payment currency <em>[Create credit transfer](#operation/addCreditTransferUsingPOST)</em>
-      7001 | Date format invalid <em>[List mandates](#operation/listSchemeMandatesUsingGET), [List direct debits](#operation/listDirectDebitsSchemeMandateUsingGET),[List failed direct debits](#operation/listFailedDirectDebitUsingGET), [List credit transfers](#operation/listCreditTransfersBeneficiaryUsingGET)</em>
-      7002 | 'From Date ' must be earlier or equal to 'To Date' <em>[List mandates](#operation/listSchemeMandatesUsingGET), [List direct debits](#operation/listDirectDebitsSchemeMandateUsingGET), [List failed direct debits](#operation/listFailedDirectDebitUsingGET), [List credit transfers](#operation/listCreditTransfersBeneficiaryUsingGET)</em>
+      7001 | Date format invalid <em>[List mandates](#operation/listSchemeMandatesUsingGET), [List direct debits](#operation/listDirectDebitsSchemeMandateUsingGET),[List failed direct debits](#operation/listFailedDirectDebitUsingGET)</em>
+      7002 | 'From Date ' must be earlier or equal to 'To Date' <em>[List mandates](#operation/listSchemeMandatesUsingGET), [List direct debits](#operation/listDirectDebitsSchemeMandateUsingGET), [List failed direct debits](#operation/listFailedDirectDebitUsingGET)</em>
       7003 | Max date range is exceeded <em>[List mandates](#operation/listSchemeMandatesUsingGET), [List direct debits](#operation/listDirectDebitsSchemeMandateUsingGET), [List failed direct debits](#operation/listFailedDirectDebitUsingGET)</em>
       7004 | Boolean parameter value must be either 'true' or 'false' <em>[List failed direct debits](#operation/listFailedDirectDebitUsingGET), [Create direct debit](#operation/addSinglePaymentUsingPOST), [Create payment schedule](#operation/addPaymentScheduleUsingPOST), [Create direct debit and mandate](#operation/addSinglePaymentMOTFUsingPOST), [Create payment schedule and mandate](#operation/addPaymentScheduleUsingPOST_1)</em>
       7005 | Max file size exceeded <em>[Upload file](#operation/uploadFileUsingPOST)</em>
@@ -484,16 +442,16 @@ tags:
       7008 | Invalid file name <em>[Upload file](#operation/uploadFileUsingPOST)</em>
       7009 | The Creditor Scheme ID/Type referenced does not exist within the system <em>[Upload file](#operation/uploadFileUsingPOST)</em>
       7010 | Debtor Name is invalid or max length is exceeded <em>[Create mandate](#operation/addMandateUsingPOST), [Update mandate](#operation/editMandateUsingPUT), [List mandates](#operation/listSchemeMandatesUsingGET)</em>
-      7011 | Address Line1 is invalid or max length is exceeded <em>[Create mandate](#operation/addMandateUsingPOST), [Update mandate](#operation/editMandateUsingPUT)</em>, [Create beneficiary](#operation/addBeneficiaryUsingPOST)</em>
-      7012 | Address Line2 is invalid or max length is exceeded <em>[Create mandate](#operation/addMandateUsingPOST), [Update mandate](#operation/editMandateUsingPUT)</em>, [Create beneficiary](#operation/addBeneficiaryUsingPOST)</em>
-      7013 | Address Town is invalid or max length is exceeded <em>[Create mandate](#operation/addMandateUsingPOST), [Update mandate](#operation/editMandateUsingPUT)</em>, [Create beneficiary](#operation/addBeneficiaryUsingPOST)</em>
-      7014 | Address Postal Code is invalid or max length is exceeded <em>[Create mandate](#operation/addMandateUsingPOST), [Update mandate](#operation/editMandateUsingPUT)</em>, [Create beneficiary](#operation/addBeneficiaryUsingPOST)</em>
-      7015 | Address State is invalid or max length is exceeded <em>[Create mandate](#operation/addMandateUsingPOST), [Update mandate](#operation/editMandateUsingPUT)</em>, [Create beneficiary](#operation/addBeneficiaryUsingPOST)</em>
-      7016 | Address ISO Country Code is invalid <em>[Create mandate](#operation/addMandateUsingPOST), [Update mandate](#operation/editMandateUsingPUT)</em>, [Create beneficiary](#operation/addBeneficiaryUsingPOST)</em>
+      7011 | Address Line1 is invalid or max length is exceeded <em>[Create mandate](#operation/addMandateUsingPOST), [Update mandate](#operation/editMandateUsingPUT)</em>
+      7012 | Address Line2 is invalid or max length is exceeded <em>[Create mandate](#operation/addMandateUsingPOST), [Update mandate](#operation/editMandateUsingPUT)</em>
+      7013 | Address Town is invalid or max length is exceeded <em>[Create mandate](#operation/addMandateUsingPOST), [Update mandate](#operation/editMandateUsingPUT)</em>
+      7014 | Address Postal Code is invalid or max length is exceeded <em>[Create mandate](#operation/addMandateUsingPOST), [Update mandate](#operation/editMandateUsingPUT)</em>
+      7015 | Address State is invalid or max length is exceeded <em>[Create mandate](#operation/addMandateUsingPOST), [Update mandate](#operation/editMandateUsingPUT)</em>
+      7016 | Address ISO Country Code is invalid <em>[Create mandate](#operation/addMandateUsingPOST), [Update mandate](#operation/editMandateUsingPUT)</em>
       7017 | Debtor Language is invalid <em>[Create mandate](#operation/addMandateUsingPOST), [Update mandate](#operation/editMandateUsingPUT)</em>
       7018 | Debtor Email is invalid or max length is exceeded <em>[Create mandate](#operation/addMandateUsingPOST), [Update mandate](#operation/editMandateUsingPUT)</em>
-      7019 | Phone Number is invalid or max length is exceeded <em>[Create mandate](#operation/addMandateUsingPOST), [Update mandate](#operation/editMandateUsingPUT), [Create beneficiary](#operation/addBeneficiaryUsingPOST)</em>
-      7020 | Mobile Number is invalid or max length is exceeded <em>[Create mandate](#operation/addMandateUsingPOST), [Update mandate](#operation/editMandateUsingPUT), [Create beneficiary](#operation/addBeneficiaryUsingPOST)</em>
+      7019 | Phone Number is invalid or max length is exceeded <em>[Create mandate](#operation/addMandateUsingPOST), [Update mandate](#operation/editMandateUsingPUT)</em>
+      7020 | Mobile Number is invalid or max length is exceeded <em>[Create mandate](#operation/addMandateUsingPOST), [Update mandate](#operation/editMandateUsingPUT)</em>
       7021 | Mandate Id is invalid or max length is exceeded <em>[Create mandate](#operation/addMandateUsingPOST), [Update mandate](#operation/editMandateUsingPUT), [List mandates](#operation/listSchemeMandatesUsingGET)</em>
       7022 | Contract Reference is invalid or max length is exceeded <em>[Create mandate](#operation/addMandateUsingPOST), [Update mandate](#operation/editMandateUsingPUT)</em>
       7023 | Signature Location is invalid or max length is exceeded <em>[Create mandate](#operation/addMandateUsingPOST), [Update mandate](#operation/editMandateUsingPUT), [Activate mandate](#operation/activateMandateUsingPOST)</em>
@@ -523,9 +481,9 @@ tags:
       7047 | Payment Week of Month is invalid <em>[Create payment schedule](#operation/addPaymentScheduleUsingPOST)</em>
       7048 | Payment Day in Month is invalid <em>[Create payment schedule](#operation/addPaymentScheduleUsingPOST)</em>
       7049 | ResendMandateForSignature is invalid <em>[Update mandate](#operation/editMandateUsingPUT)</em>
-      7050 | Page Number is invalid <em>[List mandates](#operation/listSchemeMandatesUsingGET), [List direct debits](#operation/listDirectDebitsSchemeMandateUsingGET), [List beneficiaries](#operation/listBeneficiariesUsingGET), [List credit transfers](#operation/listCreditTransfersBeneficiaryUsingGET), [List Transactions](#operation/listTransactionsUsingPOSTs)</em>
-      7051 | Max page size is exceeded <em>[List mandates](#operation/listSchemeMandatesUsingGET), [List direct debits](#operation/listDirectDebitsSchemeMandateUsingGET), [List beneficiaries](#operation/listBeneficiariesUsingGET), [List credit transfers](#operation/listCreditTransfersBeneficiaryUsingGET), [List Transactions](#operation/listTransactionsUsingPOSTs)</em>
-      7052 | Page size is invalid <em>[List mandates](#operation/listSchemeMandatesUsingGET), [List direct debits](#operation/listDirectDebitsSchemeMandateUsingGET), [List beneficiaries](#operation/listBeneficiariesUsingGET), [List credit transfers](#operation/listCreditTransfersBeneficiaryUsingGET), [List Transactions](#operation/listTransactionsUsingPOSTs)</em>
+      7050 | Page Number is invalid <em>[List mandates](#operation/listSchemeMandatesUsingGET), [List direct debits](#operation/listDirectDebitsSchemeMandateUsingGET), [List Transactions](#operation/listTransactionsUsingPOSTs)</em>
+      7051 | Max page size is exceeded <em>[List mandates](#operation/listSchemeMandatesUsingGET), [List direct debits](#operation/listDirectDebitsSchemeMandateUsingGET), [List Transactions](#operation/listTransactionsUsingPOSTs)</em>
+      7052 | Page size is invalid <em>[List mandates](#operation/listSchemeMandatesUsingGET), [List direct debits](#operation/listDirectDebitsSchemeMandateUsingGET), [List Transactions](#operation/listTransactionsUsingPOSTs)</em>
       7053 | Authorization Method is invalid <em>[Activate mandate](#operation/activateMandateUsingPOST), [Create mandate](#operation/addMandateUsingPOST)</em>
       7054 | Authorization Token is invalid or max length is exceeded <em>[Activate mandate](#operation/activateMandateUsingPOST), [Create mandate](#operation/addMandateUsingPOST)</em>
       7055 | Authorization email is invalid or max length is exceeded <em>[Activate mandate](#operation/activateMandateUsingPOST), [Create mandate](#operation/addMandateUsingPOST)</em>
@@ -534,7 +492,7 @@ tags:
       7058 | Geographic Location is invalid or max length is exceeded <em>[Activate mandate](#operation/activateMandateUsingPOST), [Create mandate](#operation/addMandateUsingPOST)</em>
       7059 | Mandate Status is invalid <em>[List mandates](#operation/listSchemeMandatesUsingGET)</em>
       7060 | End To End Id is invalid <em>[Create direct debit](#operation/addSinglePaymentUsingPOST), [Create direct debit and mandate](#operation/addSinglePaymentMOTFUsingPOST)</em>	
-      7063 | Payment Status is invalid <em>[List direct debits](#operation/listDirectDebitsSchemeMandateUsingGET), [List credit transfers](#operation/listCreditTransfersBeneficiaryUsingGET)</em>
+      7063 | Payment Status is invalid <em>[List direct debits](#operation/listDirectDebitsSchemeMandateUsingGET)</em>
       7064 | Operation Reason exceeds maximum length <em>[Cancel Mandate](#operation/cancelMandateUsingPOST), [Revoke all direct debits](#operation/revokeAllDirectDebitsUsingPOST), [Revoke direct debit](#operation/revokeDirectDebitUsingPOST)</em>
       7065 | Invalid Domestic Bank Code <em>[Validate Domestic Account](#operation/validateDomesticAccountUsingPOST)</em>
       7066 | Invalid Domestic Branch Code <em>[Validate Domestic Account](#operation/validateDomesticAccountUsingPOST)</em>
@@ -543,31 +501,15 @@ tags:
       7070 | The SEPA Creditor Scheme ID does not exist for the selected scheme	<em>[Validate IBAN](#operation/validateDomesticAccountUsingPOST)</em>
       7071 | No account associated to the creditor scheme <em>[Create direct debit and mandate](#operation/addSinglePaymentMOTFUsingPOST), [Create payment schedule and mandate](#operation/addPaymentScheduleUsingPOST_1)</em>
       7072 | PDF could not be generated / retrieved <em>[Retrieve mandate document](#operation/getPdfFileUsingGET)</em>
-      7074 | Mandate Operation Reason not provided <em>[Cancel Mandate](#operation/cancelMandateUsingPOST), </em>
+      7074 | Mandate Operation Reason not provided <em>[Cancel Mandate](#operation/cancelMandateUsingPOST)</em>
       7075 | Domestic Account Number is required if IBAN is not provided <em>[Validate Domestic Account](#operation/validateDomesticAccountUsingPOST)</em>
       7076 | Invalid Domestic Account Number <em>[Validate Domestic Account](#operation/validateDomesticAccountUsingPOST)</em>
       7077 | Account Country is required if IBAN is not provided <em>[Validate Domestic Account](#operation/validateDomesticAccountUsingPOST)</em>
       7078 | 'Reject From Date' is required <em>[List failed direct debits](#operation/listFailedDirectDebitUsingGET)</em>
       7079 | 'Reject To Date' is required <em>[List failed direct debits](#operation/listFailedDirectDebitUsingGET)</em>
       7080 | Payment Custom Frequency is invalid <em>[Create payment schedule](#operation/addPaymentScheduleUsingPOST)</em>
-      7081 | Beneficiary IBAN is invalid <em>[List beneficiaries](#operation/listBeneficiariesUsingGET), [Create beneficiary](#operation/addBeneficiaryUsingPOST)</em>
-      7082 | Beneficiary Bank BIC is invalid <em>[Create beneficiary](#operation/addBeneficiaryUsingPOST)</em>
-      7083 | Beneficiary Account IBAN is required <em>[Create beneficiary](#operation/addBeneficiaryUsingPOST)</em>
-      7084 | Beneficiary object is required <em>[Create beneficiary](#operation/addBeneficiaryUsingPOST)</em>
-      7085 | Beneficiary Account object is required <em>[Create beneficiary](#operation/addBeneficiaryUsingPOST)</em>
-      7086 | Beneficiary Name is required <em>[Create beneficiary](#operation/addBeneficiaryUsingPOST)</em>
-      7087 | Beneficiary Bank BIC is required if External Account Validation is OFF <em>[Create beneficiary](#operation/addBeneficiaryUsingPOST)</em>
-      7088 | Beneficiary Language is invalid <em>[Create beneficiary](#operation/addBeneficiaryUsingPOST)</em>
-      7089 | Beneficiary Email is invalid or max length is exceeded <em>[Create beneficiary](#operation/addBeneficiaryUsingPOST)</em>
-      7090 | Requested Execution Date is required <em>[Create credit transfer](#operation/addCreditTransferUsingPOST)</em>
-      7091 | Originator IBAN is required	 <em>[Create credit transfer](#operation/addCreditTransferUsingPOST)</em>
-      7092 | Payment Currency is required <em>[Create credit transfer](#operation/addCreditTransferUsingPOST)</em>
-      7093 | Payment Currency is invalid <em>[Create credit transfer](#operation/addCreditTransferUsingPOST)</em>
-      7094 | Beneficiary account is not reachable for GBP currency <em>[Create credit transfer](#operation/addCreditTransferUsingPOST)</em>
-      7096 | Description of Purpose is invalid or max length is exceeded <em>[Create beneficiary](#operation/addBeneficiaryUsingPOST)</em>
       7098 | Invalid IBAN <em>[Validate IBAN](#operation/validateDomesticAccountUsingPOST)</em>
       7099 | Domestic Account details are not allowed if IBAN is provided <em>[Validate Domestic Account](#operation/validateDomesticAccountUsingPOST), [Validate IBAN](#operation/validateDomesticAccountUsingPOST)</em>					  
-      7100 | Beneficiary Name is invalid or max length is exceeded <em>[List beneficiaries](#operation/listBeneficiariesUsingGET), [Create beneficiary](#operation/addBeneficiaryUsingPOST), [List credit transfers](#operation/listCreditTransfersBeneficiaryUsingGET)</em>															  
       7101 | Provided schedule details would create two payments for first collecting period. Please change schedule details or twoPaymentsSamePeriod flag <em>[Create payment schedule](#operation/addPaymentScheduleUsingPOST)</em>
       7104 | Debtor Account Country does not match Scheme Country <em>[Create mandate](#operation/addMandateUsingPOST)</em>
       7105 | Creditor Account Country does not match Scheme Country <em>[Create mandate](#operation/addMandateUsingPOST)</em>
@@ -576,23 +518,15 @@ tags:
       7108 | The file extension does not match that of the content-type header <em>[Upload Mandate Document](#operation/putPdfFileUsingPOST)</em>
       7109 | The file size exceeds 2MB <em>[Upload Mandate Document](#operation/putPdfFileUsingPOST)</em>
       7110 | The file name is invalid or exceeds the max length <em>[Upload Mandate Document](#operation/putPdfFileUsingPOST)</em>
-      7111 | Originator IBAN is invalid <em>[Create credit transfer](#operation/addCreditTransferUsingPOST)</em>
-      7112 | Insufficient Funds <em>[Create credit transfer](#operation/addCreditTransferUsingPOST)</em>
-      7113 | Transfer Failed. Please try again later  <em>[Create credit transfer](#operation/addCreditTransferUsingPOST)</em>
-      7114 | Transfer Failed. Please contact support  <em>[Create credit transfer](#operation/addCreditTransferUsingPOST)</em>
       7116 | A Once Off Mandate cannot have Migrating Mandate value true <em>[Update mandate](#operation/editMandateUsingPUT)</em>
       7117 | BBAN specific fields not allowed	 <em>[Create mandate](#operation/addMandateUsingPOST), [Update mandate](#operation/editMandateUsingPUT)</em>
       7118 | Payment schedule status is invalid <em>[List payment schedules](#operation/listPaymentSchedulesMandateUsingGET)</em>
       7120 | Payment schedule cannot be cancelled as it is not in ACTIVE status [Cancel Payment Schedule](#operation/cancelPaymentScheduleUsingPOST)</em>
       7123 | Mandate object is required  <em>[Create direct debit and mandate](#operation/addSinglePaymentMOTFUsingPOST),[Create payment schedule and mandate](#operation/addPaymentScheduleUsingPOST_1)</em>
       7124 | Current Creditor Scheme configuration does not allow to create mandate on the fly  <em>[Create direct debit and mandate](#operation/addSinglePaymentMOTFUsingPOST),[Create payment schedule and mandate](#operation/addPaymentScheduleUsingPOST_1)</em>
-      7125 | Requested execution date is in the past <em>[Create credit transfer](#operation/addCreditTransferUsingPOST)</em>
-      7126 | Requested execution date is not a working day <em>[Create credit transfer](#operation/addCreditTransferUsingPOST)</em>
-      7127 | Requested execution date is today and Cut-off time has passed <em>[Create credit transfer](#operation/addCreditTransferUsingPOST)</em>	
       7128 | Required request part 'file' is not present <em>[Upload Mandate Document](#operation/putPdfFileUsingPOST)</em>
       7129 | Debtor Bank BIC is required as Debtor Bank is located in a NON-EEA Country <em>[Create mandate](#operation/addMandateUsingPOST),[Create direct debit and mandate](#operation/addSinglePaymentMOTFUsingPOST),[Create payment schedule and mandate](#operation/addPaymentScheduleUsingPOST_1)</em>
-      7130 | Beneficiary Bank BIC is required as Beneficiary Bank is located in a NON-EEA Country <em>[Create beneficiary](#operation/addBeneficiaryUsingPOST)</em>
-      7131 | Field is invalid or max length is exceeded <em>[Create account](#operation/addAccountUsingPOST), [List accounts](#operation/listAccountsUsingPOST), [List credit transfers](#operation/listCreditTransfersBeneficiaryUsingGET)</em>
+      7131 | Field is invalid or max length is exceeded <em>[Create account](#operation/addAccountUsingPOST), [List accounts](#operation/listAccountsUsingPOST)</em>
       7132 | Field is required <em>[Create account](#operation/addAccountUsingPOST)</em>
       7133 | IBAN is requried if External Account Validation is off <em>[Create account](#operation/addAccountUsingPOST)</em>
       7134 | Object is required <em>[Create account](#operation/addAccountUsingPOST)</em>
@@ -607,32 +541,12 @@ tags:
       7143 | Electronic Signature Details object is required. <em>[Create mandate](#operation/addMandateUsingPOST), [Activate mandate](#operation/activateMandateUsingPOST)</em>
       7144 | Account currency does not match payment currency. em>[Create transfer](#operation/transferUsingPOST) </em>
       7145 | Account From is the same as Account To. <em>[Create transfer](#operation/transferUsingPOST) </em>
-      7146 | Transfer not allowed for current Originator configuration. <em>[Create transfer](#operation/transferUsingPOST), [Create credit transfer](#operation/addCreditTransferUsingPOST)</em>
+      7146 | Transfer not allowed for current Originator configuration. <em>[Create transfer](#operation/transferUsingPOST)</em>
       7147 | Transfer not allowed for Originator type. <em>[Create transfer](#operation/transferUsingPOST) </em>
-      7148 | The Execution Date must be set to today's date. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
       7149 | Master Account is type is invalid <em>[Create Account](#operation/addAccountUsingPOST)</em>
       7150 | Master Account currency has to be the same as Sub-Account currency <em>[Create Account](#operation/addAccountUsingPOST)</em>
-      7152 | Payment amount exceeds max allowed scheme limit. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7153 | Requested payment type is not supported by Originator. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7154 | Originator Bank BIC is required for EXPRESS payments. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7155 | Beneficiary Bank BIC is required for EXPRESS payments  <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7156 | Beneficiary account is not reachable for requested payment type <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
       7157 | Original transaction has not been found
-      7158 | Either originatorIban or originatorAccount object is allowed.  <em>Create beneficiary](#operation/addBeneficiaryUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7159 | Either Iban or Domestic Account is allowed. <em>Create beneficiary](#operation/addBeneficiaryUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7160 | Domestic Bank Code is required for provided Account Country. <em>Create beneficiary](#operation/addBeneficiaryUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7161 | Domestic Bank Code is not allowed for provided Account Country. <em>Create beneficiary](#operation/addBeneficiaryUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7162 | Domestic Branch Code is required for provided Account Country. <em>Create beneficiary](#operation/addBeneficiaryUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7163 | Domestic Branch Code is not allowed for provided Account Country. <em>Create beneficiary](#operation/addBeneficiaryUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7164 | Domestic Checksum is required for provided Account Country. <em>Create beneficiary](#operation/addBeneficiaryUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7165 | Domestic Checksum is not allowed for provided Account Country. <em>Create beneficiary](#operation/addBeneficiaryUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
       7166 | Debtor Name, Address Line 1 and Country are required where the Debtor bank and/or Creditor bank is based in a non-EEA country. Please update the mandate with the required information. <em>[Create mandate](#operation/addMandateUsingPOST), [Update mandate](#operation/editMandateUsingPUT), [Create direct debit and mandate](#operation/addSinglePaymentMOTFUsingPOST), [Create payment schedule and mandate](#operation/addPaymentScheduleUsingPOST_1)</em>
-      7167 | Credit transfer not available from this account. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7168 | Credit transfer not allowed at the moment due to account settlement. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7169 | Requested Execution Date is not far enough in the future <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7170 | End to End ID invalid, for GBP Standard payments must follow [A-Z0-9-/.& ]{0,18} <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7200 | JWS-Signature header is required. <em>[Create beneficiary](#operation/addBeneficiaryUsingPOST), [Create credit transfer](#operation/addCreditTransferUsingPOST)</em>
-      7201 | JWS-Signature is invalid. <em>[Create beneficiary](#operation/addBeneficiaryUsingPOST), [Create credit transfer](#operation/addCreditTransferUsingPOST)</em>
       7202 | Invalid file MIME Type for file extention. Please check the file content. <em>[Upload file](#operation/uploadFileUsingPOST)</em>	
       7203 | Field is invalid or max length is exeeded <em>Multiple endpoints.  <em>Response details.field indicates the request property the error is related to</em>
       7204 | Value Date To is invalid. <em>[List Transactions](#operation/listTransactionsUsingPOSTs)</em>
@@ -641,29 +555,6 @@ tags:
       7207 | Amount To is invalid. <em>[List Transactions](#operation/listTransactionsUsingPOSTs)</em>
       7208 | 'Value Date From' is not earlier or equal to 'Value Date To'. <em>[List Transactions](#operation/listTransactionsUsingPOSTs)</em>
       7209 | 'Amount From' is greater then 'Amount To'. <em>[List Transactions](#operation/listTransactionsUsingPOSTs)</em>
-      7300 | UltimateParty Name' is invalid or max length is exceeded. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7301 | UltimateParty Other SchemeName Code' is Invalid. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7302 | UltimateParty Other SchemeName Proprietary' is Invalid. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7303 | UltimateParty Other ID' is Invalid. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7304 | UltimateParty Other Issuer' is Invalid. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7305 | UltimateParty OrganisationId BicorBei' is Invalid. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7306 | UltimateParty PrivateId BirthDate' is Invalid. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7307 | UltimateParty PrivateId BirthDate' is required. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7308 | UltimateParty PrivateId CityOfBirth' is Invalid. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7309 | UltimateParty PrivateId CountryOfBirth' is Invalid. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7310 | UltimateParty PrivateId CountryOfBirth' is required. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7330 | UltimateCreditor either 'organisationId' or 'privateId' is allowed. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7331 | UltimateCreditor OrganisationId either 'bicOrBei' or 'other' is allowed. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7332 | UltimateCreditor OrganisationId Other SchemeName either 'code' or 'proprietary' is allowed. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7333 | UltimateCreditor PrivateId either 'dateAndPlaceOfBirth' or 'other' is allowed. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7334 | UltimateCreditor PrivateId Other SchemeName either 'code' or 'proprietary' is allowed. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7335 | UltimateDebtor either 'organisationId' or 'privateId' is allowed. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7336 | UltimateDebtor OrganisationId either 'bicOrBei' or 'other' is allowed. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7337 | UltimateDebtor OrganisationId Other SchemeName either 'code' or 'proprietary' is allowed. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7338 | UltimateDebtor PrivateId either 'dateAndPlaceOfBirth' or 'other' is allowed. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7339 | UltimateDebtor PrivateId Other SchemeName either 'code' or 'proprietary' is allowed. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7340 | UltimateParty Other ID' is required. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
-      7341 | UltimateParty PrivateId CityOfBirth' is required. <em>[Create credit transfer](#operation/addCreditTransferUsingPOST), [Create Credit Transfer and Beneficiary](#operation/addCreditTransferUsingPOST-and-beneficiary)</em>
       7342 | Bank Branch Code must be set before generating a Nuapay account.<em>[Create account](#operation/addAccountUsingPOST)</em>
       7343 | When generating an IBAN the Bank country must be part of the EEA. Please check the bank country and try again <em>[Create account](#operation/addAccountUsingPOST)</em>
       7344 | The Bank Branch has closed (or is due to close)<em>[Create mandate](#operation/addMandateUsingPOST), [Update mandate](#operation/editMandateUsingPUT)</em>
@@ -785,6 +676,8 @@ tags:
       * Output Encoding Rules are applied to some services and will be applied to all services in the future.
   - name: Changelog
     description: |-
+      ## 2024-12-31
+      * Removed CT and Beneficiary endpoints
       ## 2023-05-13
       * Added holdingBank object to 'Validate Accounts' reponse
       
@@ -982,10 +875,6 @@ x-tagGroups:
       - Mandates
       - Direct Debits
       - Payment Schedules
-  - name: Credit Transfers APIs
-    tags:
-      - Beneficiaries
-      - Credit Transfers
   - name: Nuapay Accounts APIs
     tags:
       - Accounts
@@ -1204,16 +1093,23 @@ paths:
                   currency: EUR
                   type: CURRENT_ACCOUNT
                   status: ACTIVE
+                  externalId: 6p3ljpo7bv
                   identification:
                     iban: GB35SELN00999903769154
                     domesticAccountNumber: "03769154"
                     domesticBankCode: null
                     domesticBranchCode: "009999"
-                    domesticAccountChecksum: null
+                    domesticChecksum: null
                     domesticAccountCountry: GB
                     bic: SELNGB21XXX
                   secondaryIdentification: REST ACC
-                  links: []
+                  links: [
+                    {
+                      "resourceType": "balances",
+                      "id": null,
+                      "uri": "/accounts/6p3ljpo7bv/balances"
+                    }
+                  ]
               page:
                 pageNumber: 1
                 pageSize: 10
@@ -1333,12 +1229,13 @@ paths:
                 currency: EUR
                 type: CURRENT_ACCOUNT
                 status: ACTIVE
+                externalId: 6p3ljpo7bv
                 identification:
                   iban: GB35SELN00999903769154
                   domesticAccountNumber: "03769154"
                   domesticBankCode: null
                   domesticBranchCode: "009999"
-                  domesticAccountChecksum: null
+                  domesticChecksum: null
                   domesticAccountCountry: GB
                   bic: SELNGB21
                 secondaryIdentification: "12REST ACC345"
@@ -1453,12 +1350,13 @@ paths:
                   actualHolderName: OriginatorName re Customer
                   currency: EUR
                   type: SUB_ACCOUNT
+                  externalId: 6p3ljpo7bv
                   identification:
                     iban: GB35SELN00999903769154
                     domesticAccountNumber: "03769154"
                     domesticBankCode: null
                     domesticBranchCode: "009999"
-                    domesticAccountChecksum: null
+                    domesticChecksum: null
                     domesticAccountCountry: GB
                     bic: SELNGB21XXX
                   secondaryIdentification: REST ACC
@@ -1559,7 +1457,318 @@ paths:
       security:
         - MerchantOAuth2:
           - accounts_read
-        - MerchantApiKey: []
+        - MerchantApiKey: [ ]
+  /accounts/{accountId}/settlements:
+    get:
+      tags:
+        - Accounts
+      summary: List Account Settlements
+      description: |-
+        GET  request used to retrieve a list of settlements for  account in a secured way.
+      operationId: listSettlementsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: accountId
+          in: path
+          description: accountId
+          required: true
+          type: string
+        - name: pagenumber
+          in: query
+          required: false
+          type: integer
+          format: int32
+          description: "Holds page number to be returned. Default: 1"
+          default: 1
+        - name: pagesize
+          in: query
+          required: false
+          type: integer
+          format: int32
+          description: "Holds page size to be returned. Default: 20."
+          default: 20
+        - name: settlementamountfrom
+          in: query
+          description: Settlement Amount From
+          required: false
+          type: string
+        - name: settlementamountto
+          in: query
+          description: Settlement Amount To
+          required: false
+          type: string
+        - name: settlementdatefrom
+          in: query
+          description: Settlement Date From
+          required: false
+          type: string
+          format: date
+        - name: settlementdateto
+          in: query
+          description: Settlement Date To
+          required: false
+          type: string
+          format: date
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/ListAccountSettlementsResponse"
+          examples:
+            application/json:
+              uri: /accounts/6bee3razby/settlements
+              data:
+                - id: j29p3kxabx
+                  uri: /accounts/6bee3razby/settlements/j29p3kxabx
+                  accountHolderName: Merchant Name
+                  iban: GB35SELN00999903769154
+                  settlementIban: FR7630006000011234567890189
+                  currency: EUR
+                  reserveForPayouts: 0.00
+                  settlementDate: 2024-12-27
+                  settlementRunDate: 2024-12-24T20:06:03.774Z
+                  minimumBalance: 10.00
+                  openingBalance: 10.00
+                  closingBalance: 10.00
+                  currentReserve: 0.00
+                  previousReserve: 0.00
+                  settlementAmount: 0.00
+                  previousSettlementId: bbee3razby
+                  floatExposure:
+                    numberOfTransactions: 0
+                    valueOfTransactions: 0.00
+                    floatRate: 0.05
+                    maxExposurePreFloat: 5000.00
+                  settlementCreditTransfers: [ ]
+                - id: abxq9opd2l
+                  uri: /accounts/6bee3razby/settlements/abxq9opd2l
+                  accountHolderName: Merchant2 Name
+                  iban: GB35SELN00999903769154
+                  settlementIban: FR7630006000011234567890189
+                  currency: EUR
+                  reserveForPayouts: 0.00
+                  settlementDate: 2024-12-27
+                  settlementRunDate: 2024-12-24T20:06:03.774Z
+                  minimumBalance: 0.00
+                  openingBalance: 10788.83
+                  closingBalance: 1024.31
+                  currentReserve: 1024.31
+                  previousReserve: 0.00
+                  settlementAmount: 14886.06
+                  previousSettlementId: ybee3razby
+                  floatExposure:
+                    numberOfTransactions: 4
+                    valueOfTransactions: 20486.16
+                    floatRate: 0.05
+                    maxExposurePreFloat: 5000.00
+                  settlementCreditTransfers:
+                    - id: 6bee3razby
+                      uri: /credittransfers/6bee3razby
+                      amount: 14886.06
+                      currency: EUR
+                      executionDate: 2024-12-27
+              page:
+                pageNumber: 1
+                pageSize: 10
+                totalElements: 1
+                totalPages: 1
+              sort: [ ]
+        400:
+          description: Bad request
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+          examples:
+            application/json:
+              returnCode: "8888"
+              returnDescription: Input validation errors occurred. Please check details.
+              details:
+                - code: "7131"
+                  field: settlementdatefrom
+                  description: Field is invalid or max length is exceeded
+                  resourceUri: null
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+          examples:
+            application/json:
+              returnCode: null
+              returnDescription: null
+              details: null
+        403:
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+          examples:
+            application/json:
+              returnCode: "7201"
+              returnDescription: JWS-Signature is invalid.
+              details: null
+        404:
+          description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+          examples:
+            application/json:
+              returnCode: "10093"
+              returnDescription: Requested resource is not available
+              details: null
+        405:
+          description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+          examples:
+            application/json:
+              returnCode: null
+              returnDescription: null
+              details: null
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+          examples:
+            application/json:
+              returnCode: "9999"
+              returnDescription: Input validation errors occurred. Please check details.
+              details:
+                - code: "7051"
+                  field: pagesize
+                  description: Max page size is exceeded
+                  resourceUri: null
+        429:
+          description: Too Many Requests
+          x-sentenial:
+            enriched: "true"
+          headers:
+            X-Rate-Limit-Reset:
+              type: integer
+              format: int32
+              description: Number in seconds to wait before retrying request.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+          examples:
+            application/json:
+              returnCode: null
+              returnDescription: null
+              details: null
+      security:
+        - MerchantOAuth2:
+            - accounts_settlements_read
+        - MerchantApiKey: [ ]
+  /accounts/{accountId}/settlements/{settlementId}:
+    get:
+      tags:
+        - Accounts
+      summary: Retrieve Account Settlement
+      description: |-
+        GET  request used to retrieve a settlement for  account in a secured way.
+      operationId: retrieveSettlementUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: accountId
+          in: path
+          description: accountId
+          required: true
+          type: string
+        - name: settlementId
+          in: path
+          description: settlementId
+          required: true
+          type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/RetrieveAccountSettlementResponse"
+          examples:
+            application/json:
+              uri: /accounts/6bee3razby/settlements/abxq9opd2l
+              data:
+                id: abxq9opd2l
+                uri: /accounts/6bee3razby/settlements/abxq9opd2l
+                accountHolderName: Merchant2 Name
+                iban: GB35SELN00999903769154
+                settlementIban: FR7630006000011234567890189
+                currency: EUR
+                reserveForPayouts: 0.00
+                settlementDate: 2024-12-24
+                settlementRunDate: 2024-12-24T20:06:03.774Z
+                minimumBalance: 0.00
+                openingBalance: 10788.83
+                closingBalance: 1024.31
+                currentReserve: 1024.31
+                previousReserve: 0.00
+                settlementAmount: 14886.06
+                previousSettlementId: ybee3razby
+                floatExposure:
+                  numberOfTransactions: 4
+                  valueOfTransactions: 20486.16
+                  floatRate: 0.05
+                  maxExposurePreFloat: 5000.00
+                settlementCreditTransfers:
+                  - id: 6bee3razby
+                    uri: /credittransfers/6bee3razby
+                    amount: 14886.06
+                    currency: EUR
+                    executionDate: 2024-12-27
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+          examples:
+            application/json:
+              returnCode: null
+              returnDescription: null
+              details: null
+        403:
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+          examples:
+            application/json:
+              returnCode: "7201"
+              returnDescription: JWS-Signature is invalid.
+              details: null
+        404:
+          description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+          examples:
+            application/json:
+              returnCode: "10093"
+              returnDescription: Requested resource is not available
+              details: null
+        405:
+          description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+          examples:
+            application/json:
+              returnCode: null
+              returnDescription: null
+              details: null
+        429:
+          description: Too Many Requests
+          x-sentenial:
+            enriched: "true"
+          headers:
+            X-Rate-Limit-Reset:
+              type: integer
+              format: int32
+              description: Number in seconds to wait before retrying request.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+          examples:
+            application/json:
+              returnCode: null
+              returnDescription: null
+              details: null
+      security:
+        - MerchantOAuth2:
+            - accounts_settlements_read
+        - MerchantApiKey: [ ]
   /accounts/{accountId}/balances:
     get:
       tags:
@@ -1675,195 +1884,6 @@ paths:
         - MerchantOAuth2:
           - accounts_read
         - MerchantApiKey: []
-  /accounts/{accountId}/credittransfers/list:
-    post:
-      tags:
-        - Credit Transfers
-      summary: List Credit Transfers for Account
-      description: |-
-        A POST request used to retrieve a list of credit transfers for a given account in secured way. Request parameters to be passed in the JSON body object. 
-        A request must contain the application/json content type.
-
-        Important Note: Since this is a POST endpoint with only optional parameters when not providing any parameters user must supply an empty JSON body using {}.
-      operationId: listCreditTransfersForAccountUsingPOST
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-        - name: JWS-Signature
-          in: header
-          description: JWS-Signature
-          required: false
-          type: string
-        - name: Idempotency-Key
-          in: header
-          x-sentenial:
-            enriched: "true"
-          description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
-          required: false
-          type: string
-          maxLength: 50
-        - name: accountId
-          in: path
-          description: Encoded Account Id of the account to list credit transfers from.
-          required: true
-          type: string
-        - in: body
-          name: listCreditTransfersAccountRequest
-          description: listCreditTransfersAccountRequest
-          required: true
-          schema:
-            $ref: "#/definitions/ListCreditTransferPostRequestEntity"
-      responses:
-        200:
-          description: OK
-          schema:
-            $ref: "#/definitions/RestPaginatedCollectionResponseEnvelopeOfCreditTransferResponseEntity"
-          examples:
-            application/json:
-              uri: /accounts/w24y3dya2p/credittransfers/list
-              data:
-                - id: j29pjrvdbx
-                  uri: /beneficiaries/j29pjqknbx/credittransfers/j29pjrvdbx
-                  originatorIban: GB25SELN00999988796624
-                  originatorAccount:
-                    iban: GB25SELN00999988796624
-                    bic: SELNGB21
-                    domesticAccountNumber: "88796624"
-                    domesticBankCode: null
-                    domesticBranchCode: "009999"
-                    domesticCheckSum: null
-                    domesticAccountCountry: GB
-                  requestedExecutionDate: "2018-10-27"
-                  paymentAmount: 5000.01
-                  paymentCurrency: EUR
-                  endToEndId: "563456456"
-                  remittanceInformation: Remittance info
-                  paymentStatus: ACCEPTED
-                  type: STANDARD
-                  paymentScheme: SCT
-                  ultimateCreditor: null
-                  ultimateDebtor: null
-                  beneficiaryName: Beneficiary Name
-                  beneficiaryAccount:
-                    iban: GB47SELN00999912345678
-                    domesticAccountNumber: "12345678"
-                    domesticBankCode: null
-                    domesticBranchCode: "009999"
-                    domesticCheckSum: null
-                    domesticAccountCountry: GB
-                    bic: SELNGB21
-                  rejectDetails:
-                    rejectReason: null,
-                    rejectDescription: null,
-                    rejectType: null,
-                    rejectDate: null
-                  originalBeneficiaryAccount:
-                    iban: null,
-                    domesticAccountNumber: null,
-                    domesticBankCode: null,
-                    domesticBranchCode: null,
-                    domesticCheckSum: null,
-                    domesticAccountCountry: null,
-                    bic: null
-                  links: []
-              page:
-                pageNumber: 1
-                pageSize: 1
-                totalElements: 1
-                totalPages: 1
-              sort: []
-        400:
-          description: Bad request
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "8888"
-              returnDescription: Input validation errors occurred. Please check details.
-              details:
-                - code: "7001"
-                  field: "filter.executionDateFrom"
-                  description: Date format invalid
-                  resourceUri: null
-        401:
-          description: Unauthorized
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-        403:
-          description: Forbidden
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "10091"
-              returnDescription: Access denied
-              details: null
-        404:
-          description: Not Found
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "10093"
-              returnDescription: Requested resource is not available
-              details: null
-        405:
-          description: Method Not Allowed
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-        415:
-          description: Unsupported Media Type
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-        422:
-          description: Unprocessable Entity
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "9999"
-              returnDescription: "Input validation errors occurred. Please check details."
-              details:
-                - code: "7002"
-                  description: "'From Date' must be earlier or equal to 'To Date'"
-                  resourceUri: null
-        429:
-          description: Too Many Requests
-          x-sentenial:
-            enriched: "true"
-          headers:
-            X-Rate-Limit-Reset:
-              type: integer
-              format: int32
-              description: Number in seconds to wait before retrying request.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-      security:
-        - MerchantOAuth2:
-          - credittransfers_read
-        - MerchantApiKey: []
   /accounts/{accountId}/transactions/list:
     post:
       tags:
@@ -1902,7 +1922,7 @@ paths:
           description: request
           required: true
           schema:
-            $ref: "#/definitions/ListAccountTransactionsRequest"
+            $ref: "#/definitions/ListNuapayAccountTransactionsRequest"
       responses:
         200:
           description: OK
@@ -1941,6 +1961,7 @@ paths:
                   currency: EUR
                   creditDebitIndicator: CREDIT
                   type: BOOKED_BALANCE
+                  timestamp: 1652956321012
                 counterparty:
                   name: Originator Name
                   address:
@@ -1957,6 +1978,8 @@ paths:
                     domesticBankCode: null
                     domesticBranchCode: null
                     domesticCheckSum: null
+                creationDateTime: "2022-05-19T10:32:01Z"
+                creationTimestamp: 1652956321000
                 links: []
         400:
           description: Bad request
@@ -2097,7 +2120,7 @@ paths:
             application/json:
               returnCode: '10093'
               returnDescription: Requested resource is not available
-              details: null   
+              details: null
         405:
           description: Method Not Allowed
           schema:
@@ -2106,7 +2129,7 @@ paths:
             application/json:
               returnCode: null
               returnDescription: null
-              details: null         
+              details: null
       x-sentenial:
         enriched: true
         429:
@@ -2237,1505 +2260,6 @@ paths:
                 description: Batch is in invalid state for this operation
                 field: null
                 resourceUri:
-        429:
-          description: Too Many Requests
-          x-sentenial:
-            enriched: "true"
-          headers:
-            X-Rate-Limit-Reset:
-              type: integer
-              format: int32
-              description: Number in seconds to wait before retrying request.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-      security:
-        - MerchantOAuth2:
-          - credittransfers
-        - MerchantApiKey: []
-  /beneficiaries:
-    get:
-      tags:
-        - Beneficiaries
-      summary: List Beneficiaries
-      description: A GET request used to retrieve a collection of beneficiaries. It can return beneficiaries associated to an organization.
-      operationId: listBeneficiariesUsingGET
-      produces:
-        - application/json
-      parameters:
-        - name: beneficiaryiban
-          in: query
-          required: false
-          type: string
-          pattern: '[a-zA-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}'
-          description: Beneficiary IBAN.
-        - name: beneficiaryname
-          in: query
-          required: false
-          type: string
-          description: Name of Beneficiary. Used to filter credit transfers with provided beneficiary name, full and partial names are supported.
-          maxLength: 70
-        - name: pagenumber
-          in: query
-          required: false
-          type: integer
-          format: int32
-          description: "Holds page number to be returned. Default: 1"
-          default: 1
-        - name: pagesize
-          in: query
-          required: false
-          type: integer
-          format: int32
-          description: "Holds page size to be returned. Default: 20"
-          default: 20
-        - name: usercreatedbeneficiary
-          in: query
-          required: false
-          type: boolean
-      responses:
-        200:
-          description: OK
-          schema:
-            $ref: "#/definitions/RestPaginatedCollectionResponseEnvelopeOfListBeneficiaryResponseEntity"
-          examples:
-            application/json:
-              uri: /beneficiaries
-              data:
-                - id: w24y3olz2p
-                  uri: /beneficiaries/w24y3olz2p
-                  beneficiary:
-                    name: Beneficiary Name
-                    address:
-                      line1: Beneficiary Address Line1
-                      line2: Beneficiary Address Line2
-                      town: Beneficiary Town
-                      postCode: "123123"
-                      state: Beneficiary State
-                      country: IE
-                    language: en
-                    email: beneficiary@mail.com
-                    mobileNumber: "0360321321321"
-                    phoneNumber: "0360123123123"
-                    descriptionOfPurpose: Description of Purpose
-                  beneficiaryAccount:
-                    iban: GB47SELN00999912345678
-                    bic: SELNGB21
-                    domesticAccountNumber: "12345678"
-                    domesticBankCode: null
-                    domesticBranchCode: "009999"
-                    domesticCheckSum: null
-                    domesticAccountCountry: GB
-                - id: abxq9jak2l
-                  uri: /beneficiaries/abxq9jak2l
-                  beneficiary:
-                    name: Beneficiary Name
-                    address:
-                      line1: Beneficiary Address Line1
-                      line2: Beneficiary Address Line2
-                      town: Beneficiary Town
-                      postCode: "123123"
-                      state: Beneficiary State
-                      country: IE
-                    language: en
-                    email: beneficiary@mail.com
-                    mobileNumber: "0360321321321"
-                    phoneNumber: "0360123123123"
-                    descriptionOfPurpose: Description of Purpose
-                  beneficiaryAccount:
-                    iban: GB47SELN00999912345678
-                    bic: SELNGB21
-                    domesticAccountNumber: "12345678"
-                    domesticBankCode: null
-                    domesticBranchCode: "009999"
-                    domesticCheckSum: null
-                    domesticAccountCountry: GB
-              page:
-                pageNumber: 1
-                pageSize: 20
-                totalElements: 2
-                totalPages: 1
-              sort: []
-        400:
-          description: Bad request
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "7100"
-              returnDescription: Beneficiary Name is invalid or max length is exceeded
-              details: null
-        401:
-          description: Unauthorized
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-        403:
-          description: Forbidden
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "10091"
-              returnDescription: Access denied
-              details: null
-        404:
-          description: Not Found
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "10093"
-              returnDescription: Requested resource is not available
-              details: null
-        405:
-          description: Method Not Allowed
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-        422:
-          description: Unprocessable Entity
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "7051"
-              returnDescription: Max page size is exceeded
-              details: null
-        429:
-          description: Too Many Requests
-          x-sentenial:
-            enriched: "true"
-          headers:
-            X-Rate-Limit-Reset:
-              type: integer
-              format: int32
-              description: Number in seconds to wait before retrying request.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-      security:
-        - MerchantOAuth2:
-          - beneficiaries_read
-        - MerchantApiKey: []
-    post:
-      tags:
-        - Beneficiaries
-      summary: Create Beneficiary
-      description: A POST request used to create beneficiaries. The request must contain the application/json content type. In the request body you must provide a JSON structure describing the Beneficiary.
-      operationId: addBeneficiaryUsingPOST
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-        - name: JWS-Signature
-          in: header
-          description: JWS-Signature
-          required: true
-          type: string
-        - name: Idempotency-Key
-          in: header
-          x-sentenial:
-            enriched: "true"
-          description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
-          required: false
-          type: string
-          maxLength: 50
-        - in: body
-          name: addBeneficiaryRequest
-          description: |-
-            Note: For the beneficiary account information use either IBAN & BIC or Domestic Account details, not both.
-          required: true
-          schema:
-            $ref: "#/definitions/AddBeneficiaryRequestEntity"
-
-      responses:
-        201:
-          description: Created
-          schema:
-            $ref: "#/definitions/RestResponseEnvelopeOfAddBeneficiaryResponseEntity"
-          examples:
-            application/json:
-              uri: /beneficiaries/46pkx7o9n5
-              data:
-                id: 46pkx7o9n5
-                uri: /beneficiaries/46pkx7o9n5
-                beneficiary:
-                  name: Beneficiary Name
-                  address:
-                    line1: Beneficiary Address Line1
-                    line2: Beneficiary Address Line2
-                    town: Beneficiary Town
-                    postCode: "123123"
-                    state: Beneficiary State
-                    country: IE
-                  language: en
-                  email: beneficiary@mail.com
-                  mobileNumber: "0360321321321"
-                  phoneNumber: "0360123123123"
-                  descriptionOfPurpose: Description of Purpose
-                beneficiaryAccount:
-                  iban: GB47SELN00999912345678
-                  bic: SELNGB21
-                  domesticAccountNumber: "12345678"
-                  domesticBankCode: null
-                  domesticBranchCode: "009999"
-                  domesticCheckSum: null
-                  domesticAccountCountry: GB
-                links: []
-        400:
-          description: Bad request
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "7081"
-              returnDescription: Beneficiary IBAN is invalid
-              details: null
-        401:
-          description: Unauthorized
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-        403:
-          description: Forbidden
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "7201"
-              returnDescription: JWS-Signature is invalid.
-              details: null
-        405:
-          description: Method Not Allowed
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-        415:
-          description: Unsupported Media Type
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-        422:
-          description: Unprocessable Entity
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "7159"
-              returnDescription: Either Iban or Domestic Account is allowed.
-              details: null
-        429:
-          description: Too Many Requests
-          x-sentenial:
-            enriched: "true"
-          headers:
-            X-Rate-Limit-Reset:
-              type: integer
-              format: int32
-              description: Number in seconds to wait before retrying request.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-      security:
-        - MerchantOAuth2: 
-          - beneficiaries
-        - MerchantApiKey: []
-  /beneficiaries/{beneficiaryId}:
-    get:
-      tags:
-        - Beneficiaries
-      summary: Retrieve Beneficiary
-      description: A GET request used to retrieve a beneficiary.
-      operationId: viewBeneficiaryUsingGET
-      produces:
-        - application/json
-      parameters:
-        - name: beneficiaryId
-          in: path
-          description: Encoded Beneficiary ID of the beneficiary to be viewed.
-          required: true
-          type: string
-      responses:
-        200:
-          description: OK
-          schema:
-            $ref: "#/definitions/RestResponseEnvelopeOfViewBeneficiaryResponseEntity"
-          examples:
-            application/json:
-              uri: /beneficiaries/46pkx7o9n5
-              data:
-                id: 46pkx7o9n5
-                uri: /beneficiaries/46pkx7o9n5
-                beneficiary:
-                  name: Beneficiary Name
-                  address:
-                    line1: Beneficiary Address Line1
-                    line2: Beneficiary Address Line2
-                    town: Beneficiary Town
-                    postCode: "123123"
-                    state: Beneficiary State
-                    country: IE
-                  language: en
-                  email: beneficiary@mail.com
-                  mobileNumber: "0360321321321"
-                  phoneNumber: "0360123123123"
-                  descriptionOfPurpose: Description of Purpose
-                beneficiaryAccount:
-                  iban: GB47SELN00999912345678
-                  bic: SELNGB21
-                  domesticAccountNumber: "12345678"
-                  domesticBankCode: null
-                  domesticBranchCode: "009999"
-                  domesticCheckSum: null
-                  domesticAccountCountry: GB
-                links: []
-        401:
-          description: Unauthorized
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-        403:
-          description: Forbidden
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "10091"
-              returnDescription: Access denied
-              details: null
-        404:
-          description: Not Found
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "10093"
-              returnDescription: Requested resource is not available
-              details: null
-        405:
-          description: Method Not Allowed
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-        429:
-          description: Too Many Requests
-          x-sentenial:
-            enriched: "true"
-          headers:
-            X-Rate-Limit-Reset:
-              type: integer
-              format: int32
-              description: Number in seconds to wait before retrying request.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-      security:
-        - MerchantOAuth2:
-          - beneficiaries_read
-        - MerchantApiKey: []
-  /beneficiaries/{beneficiaryId}/credittransfers:
-    get:
-      tags:
-        - Credit Transfers
-      summary: List Beneficiary Credit Transfers
-      description: A GET request used to retrieve a collection of credit transfers. This request can be used to list all credit transfers associated to a beneficiary.
-      operationId: listCreditTransfersBeneficiaryUsingGET
-      produces:
-        - application/json
-      parameters:
-        - name: beneficiaryId
-          in: path
-          description: Encoded Beneficiary ID of the beneficiary whos credit transfers are to be viewed.
-          required: true
-          type: string
-        - name: endtoendid
-          in: query
-          description: Used to filter credit transfers by provided End To End Id.
-          required: false
-          type: string
-        - name: beneficiaryiban
-          in: query
-          required: false
-          type: string
-          pattern: '[a-zA-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}'
-          description: Used to filter credit transfers by provided beneficiary IBAN.
-        - name: beneficiaryname
-          in: query
-          required: false
-          type: string
-          description: Used to filter credit transfers by provided beneficiary name. Full and partial name supported.
-          maxLength: 70
-        - name: executiondatefrom
-          in: query
-          required: false
-          type: string
-          format: date
-          description: Returns CTs to be executed from this date. Fromat yyyy-mm-dd.
-        - name: executiondateto
-          in: query
-          required: false
-          type: string
-          format: date
-          description: Returns CTs to be executed to this date. Fromat yyyy-mm-dd.
-        - name: orderby
-          in: query
-          required: false
-          type: string
-          description: Order query by, default 'id' in descending order.
-        - name: originatoriban
-          in: query
-          required: false
-          type: string
-          pattern: '[a-zA-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}'
-          description: Used to filter credit transfers by provided originator IBAN.
-        - name: pagenumber
-          in: query
-          required: false
-          type: integer
-          format: int32
-          description: "Holds page number to be returned. Default: 1"
-          default: 1
-        - name: pagesize
-          in: query
-          required: false
-          type: integer
-          format: int32
-          description: "Holds page size to be returned. Default: 20"
-          default: 20
-        - name: paymentstatus
-          in: query
-          required: false
-          type: array
-          items:
-            type: string
-          collectionFormat: multi
-          enum:
-            - ALL
-            - READY_FOR_EXPORT
-            - REJECTED
-            - RECALLED
-            - EXPORTED
-            - ACCEPTED
-            - PENDING
-            - PENDING_SETTLEMENT
-          description: A number of statuses can be queried within a single request by providing multiple occurences of the parameter.
-      responses:
-        200:
-          description: OK
-          schema:
-            $ref: "#/definitions/RestPaginatedCollectionResponseEnvelopeOfCreditTransferResponseEntity"
-          examples:
-            application/json:
-              uri: /beneficiaries/abxq9ox92l/credittransfers
-              data:
-                - id: a2av38kz2w
-                  uri: /beneficiaries/abxq9ox92l/credittransfers/a2av38kz2w
-                  originatorIban: GB94SELN00999976543215
-                  originatorAccount:
-                    iban: "GB94SELN00999976543215"
-                    bic: "SELNGB21"
-                    domesticAccountNumber: "76543215"
-                    domesticBankCode: null
-                    domesticBranchCode: "009999"
-                    domesticCheckSum: null
-                    domesticAccountCountry: "GB"
-                  requestedExecutionDate: "2016-10-14"
-                  actualExecutionDate: "2016-10-15"
-                  paymentAmount: 5000.01
-                  paymentCurrency: EUR
-                  endToEndId: 12345678901330w4
-                  remittanceInformation: Remittance info
-                  structuredRemittanceInformation: null
-                  paymentStatus: READY_FOR_EXPORT
-                  type: EXPRESS
-                  paymentScheme: SCT
-                  ultimateCreditor: null
-                  ultimateDebtor: null
-                  beneficiaryName: Beneficiary Name
-                  beneficiaryAccount:
-                    iban: GB47SELN00999912345678
-                    domesticAccountNumber: "12345678"
-                    domesticBankCode: null
-                    domesticBranchCode: "009999"
-                    domesticCheckSum: null
-                    domesticAccountCountry: GB
-                    bic: SELNGB21
-                  rejectDetails:
-                    rejectReason: null,
-                    rejectDescription: null,
-                    rejectType: null,
-                    rejectDate: null
-                  originalBeneficiaryAccount:
-                    iban: null,
-                    domesticAccountNumber: null,
-                    domesticBankCode: null,
-                    domesticBranchCode: null,
-                    domesticCheckSum: null,
-                    domesticAccountCountry: null,
-                    bic: null                                        
-                  links:
-                    - resourceType: beneficiary
-                      id: abxqg83n2l
-                      uri: /beneficiaries/abxqg83n2l
-                - id: j29p3gkabx
-                  uri: /beneficiaries/abxq9ox92l/credittransfers/j29p3gkabx
-                  originatorIban: GB94SELN00999976543215
-                  originatorAccount:
-                    iban: "GB94SELN00999976543215"
-                    bic: "SELNGB21"
-                    domesticAccountNumber: "76543215"
-                    domesticBankCode: null
-                    domesticBranchCode: "009999"
-                    domesticCheckSum: null
-                    domesticAccountCountry: "GB"
-                  requestedExecutionDate: "2016-10-14"
-                  paymentAmount: 1.01
-                  paymentCurrency: EUR
-                  endToEndId: abcdefghij1234
-                  remittanceInformation: Remittance info
-                  structuredRemittanceInformation: null
-                  paymentStatus: READY_FOR_EXPORT
-                  type: STANDARD
-                  paymentScheme: SCT
-                  ultimateCreditor: null
-                  ultimateDebtor: null
-                  beneficiaryName: Beneficiary Name
-                  beneficiaryAccount:
-                    iban: GB47SELN00999912345678
-                    domesticAccountNumber: "12345678"
-                    domesticBankCode: null
-                    domesticBranchCode: "009999"
-                    domesticCheckSum: null
-                    domesticAccountCountry: GB
-                    bic: SELNGB21
-                  rejectDetails:
-                    rejectReason: null,
-                    rejectDescription: null,
-                    rejectType: null,
-                    rejectDate: null
-                  originalBeneficiaryAccount:
-                    iban: null,
-                    domesticAccountNumber: null,
-                    domesticBankCode: null,
-                    domesticBranchCode: null,
-                    domesticCheckSum: null,
-                    domesticAccountCountry: null,
-                    bic: null                    
-                  links:
-                    - resourceType: beneficiary
-                      id: abxqg83n2l
-                      uri: /beneficiaries/abxqg83n2l
-              page:
-                pageNumber: 1
-                totalPages: 1
-                pageSize: 20
-                totalElements: 2
-              sort: []
-        202:
-          description: Accepted
-          headers:
-            Location:
-              type: string
-              description: Uri to approval
-        400:
-          description: Bad request
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "7001"
-              returnDescription: Date format invalid
-              details: null
-        401:
-          description: Unauthorized
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-        403:
-          description: Forbidden
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "10091"
-              returnDescription: Access denied
-              details: null
-        404:
-          description: Not Found
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-        405:
-          description: Method Not Allowed
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-        422:
-          description: Unprocessable Entity
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "7002"
-              returnDescription: "'From Date' must be earlier or equal to 'To Date'"
-              details: null
-        429:
-          description: Too Many Requests
-          x-sentenial:
-            enriched: "true"
-          headers:
-            X-Rate-Limit-Reset:
-              type: integer
-              format: int32
-              description: Number in seconds to wait before retrying request.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-      security:
-        - MerchantOAuth2:
-          - credittransfers_read
-        - MerchantApiKey: []
-    post:
-      tags:
-        - Credit Transfers
-      summary: Create Credit Transfer
-      description: A POST request used to create credit transfers. A request must contain the application/json content type. In the request body you must provide a JSON structure describing the Credit Transfer.
-      operationId: addCreditTransferUsingPOST
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-        - name: JWS-Signature
-          in: header
-          description: JWS-Signature
-          required: true
-          type: string
-        - name: Dynamic-Link-Id
-          in: header
-          description: Optional header used to provide additional information for SCA.
-          required: false
-          type: string
-        - name: Idempotency-Key
-          in: header
-          x-sentenial:
-            enriched: "true"
-          description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
-          required: false
-          type: string
-          maxLength: 50
-        - in: body
-          name: addCreditTransferRequest
-          description: addCreditTransferRequest
-          required: true
-          schema:
-            $ref: "#/definitions/AddCreditTransferRequestEntity"
-        - name: beneficiaryId
-          in: path
-          description: Encoded Beneficiary ID of the beneficiary to add a credit transfer against.
-          required: true
-          type: string
-      responses:
-        201:
-          description: Created
-          schema:
-            $ref: "#/definitions/RestResponseEnvelopeOfCreditTransferResponseEntity"
-          examples:
-            application/json:
-              uri: /beneficiaries/abxq9ox92l/credittransfers/a2av38kz2w
-              data:
-                id: a2av38kz2w
-                uri: /beneficiaries/abxq9ox92l/credittransfers/a2av38kz2w
-                originatorIban: GB94SELN00999976543215
-                originatorAccount:
-                  iban: "GB94SELN00999976543215"
-                  bic: "SELNGB21"
-                  domesticAccountNumber: "76543215"
-                  domesticBankCode: null
-                  domesticBranchCode: "009999"
-                  domesticCheckSum: null
-                  domesticAccountCountry: "GB"
-                requestedExecutionDate: "2016-10-14"
-                actualExecutionDate: "2016-10-15"
-                paymentAmount: 5000.01
-                paymentCurrency: EUR
-                endToEndId: 12345678901330w4
-                remittanceInformation: Remittance info
-                structuredRemittanceInformation: null
-                paymentStatus: READY_FOR_EXPORT
-                settlementDateShift: true
-                type: EXPRESS
-                paymentScheme: SCT
-                ultimateCreditor: null
-                ultimateDebtor: null
-                beneficiaryName: Beneficiary Name
-                beneficiaryAccount:
-                  iban: GB47SELN00999912345678
-                  domesticAccountNumber: "12345678"
-                  domesticBankCode: null
-                  domesticBranchCode: "009999"
-                  domesticCheckSum: null
-                  domesticAccountCountry: GB
-                  bic: SELNGB21
-                rejectDetails:
-                  rejectReason: null,
-                  rejectDescription: null,
-                  rejectType: null,
-                  rejectDate: null
-                originalBeneficiaryAccount:
-                  iban: null,
-                  domesticAccountNumber: null,
-                  domesticBankCode: null,
-                  domesticBranchCode: null,
-                  domesticCheckSum: null,
-                  domesticAccountCountry: null,
-                  bic: null                  
-              links:
-                - resourceType: beneficiary
-                  id: abxqg83n2l
-                  uri: /beneficiaries/abxqg83n2l
-        400:
-          description: Bad request
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "5009"
-              returnDescription: Invalid Date for Payment
-              details: null
-        401:
-          description: Unauthorized
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-        403:
-          description: Forbidden
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "10091"
-              returnDescription: Access denied
-              details: null
-        404:
-          description: Not Found
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "10093"
-              returnDescription: Requested resource is not available
-              details: null
-        405:
-          description: Method Not Allowed
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-        412:
-          description: Precondition Failed
-          headers:
-            Dynamic-Link-Id:
-              description: Dynamic Link Id
-              type: string
-            Authorisation-Uri:
-              description: Authorisation Uri
-              type: string
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-        415:
-          description: Unsupported Media Type
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-        422:
-          description: Unprocessable Entity
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "5008"
-              returnDescription: Invalid Payment Reference
-              details: null
-        429:
-          description: Too Many Requests
-          x-sentenial:
-            enriched: "true"
-          headers:
-            X-Rate-Limit-Reset:
-              type: integer
-              format: int32
-              description: Number in seconds to wait before retrying request.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-      security:
-        - MerchantOAuth2:
-          - credittransfers
-        - MerchantApiKey: []
-  /beneficiaries/{beneficiaryId}/credittransfers/{creditTransferId}:
-    get:
-      tags:
-        - Credit Transfers
-      summary: Retrieve Credit Transfer
-      description: A GET request used to retrieve credit transfers.
-      operationId: viewCreditTransferUsingGET
-      produces:
-        - application/json
-      parameters:
-        - name: beneficiaryId
-          in: path
-          description: Encoded Beneficiary ID of the beneficiary the credit transfer is associated to.
-          required: true
-          type: string
-        - name: creditTransferId
-          in: path
-          description: Encoded Credit Transfer ID of the credit transfer to be viewed.
-          required: true
-          type: string
-      responses:
-        200:
-          description: OK
-          schema:
-            $ref: "#/definitions/RestResponseEnvelopeOfCreditTransferResponseEntity"
-          examples:
-            application/json:
-              uri: /beneficiaries/abxq9ox92l/credittransfers/a2av38kz2w
-              data:
-                id: a2av38kz2w
-                uri: /beneficiaries/abxq9ox92l/credittransfers/a2av38kz2w
-                originatorIban: GB94SELN00999976543215
-                originatorAccount:
-                  iban: "GB94SELN00999976543215"
-                  bic: "SELNGB21"
-                  domesticAccountNumber: "76543215"
-                  domesticBankCode: null
-                  domesticBranchCode: "009999"
-                  domesticCheckSum: null
-                  domesticAccountCountry: "GB"
-                requestedExecutionDate: "2016-10-14"
-                actualExecutionDate: "2016-10-15"
-                paymentAmount: 5000.01
-                paymentCurrency: EUR
-                endToEndId: 12345678901330w4
-                remittanceInformation: Remittance info
-                structuredRemittanceInformation: null
-                paymentStatus: READY_FOR_EXPORT
-                type: EXPRESS
-                paymentScheme: SCT
-                ultimateCreditor: null
-                ultimateDebtor: null
-                beneficiaryName: Beneficiary Name
-                beneficiaryAccount:
-                  iban: GB47SELN00999912345678
-                  domesticAccountNumber: "12345678"
-                  domesticBankCode: null
-                  domesticBranchCode: "009999"
-                  domesticCheckSum: null
-                  domesticAccountCountry: GB
-                  bic: SELNGB21
-                rejectDetails:
-                  rejectReason: null,
-                  rejectDescription: null,
-                  rejectType: null,
-                  rejectDate: null
-                originalBeneficiaryAccount:
-                  iban: null,
-                  domesticAccountNumber: null,
-                  domesticBankCode: null,
-                  domesticBranchCode: null,
-                  domesticCheckSum: null,
-                  domesticAccountCountry: null,
-                  bic: null                  
-              links:
-                - resourceType: beneficiary
-                  id: abxqg83n2l
-                  uri: /beneficiaries/abxqg83n2l
-        401:
-          description: Unauthorized
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-        403:
-          description: Forbidden
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "10091"
-              returnDescription: Access denied
-              details: null
-        404:
-          description: Not Found
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "10093"
-              returnDescription: Requested resource is not available
-              details: null
-        405:
-          description: Method Not Allowed
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-        429:
-          description: Too Many Requests
-          x-sentenial:
-            enriched: "true"
-          headers:
-            X-Rate-Limit-Reset:
-              type: integer
-              format: int32
-              description: Number in seconds to wait before retrying request.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-      security:
-        - MerchantOAuth2:
-          - credittransfers_read
-        - MerchantApiKey: []
-  /credittransfers:
-    get:
-      tags:
-        - Credit Transfers
-      summary: List Originator Credit Transfers
-      description: A GET request used to retrieve a collection of credit transfers. This request can be used to list all credit transfers associated to an originator.
-      operationId: listCreditTransfersUsingGET
-      produces:
-        - application/json
-      parameters:
-        - name: endtoendid
-          in: query
-          description: Used to filter credit transfers by provided End To End Id.
-          required: false
-          type: string
-        - name: beneficiaryiban
-          in: query
-          required: false
-          type: string
-          pattern: '[a-zA-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}'
-          description: Used to filter credit transfers by provided beneficiary IBAN.
-        - name: beneficiaryname
-          in: query
-          required: false
-          type: string
-          description: Used to filter credit transfers by provided beneficiary name. Full and partial name supported.
-          maxLength: 70
-        - name: executiondatefrom
-          in: query
-          required: false
-          type: string
-          format: date
-          description: Returns CTs to be executed from this date. Fromat yyyy-mm-dd.
-        - name: executiondateto
-          in: query
-          required: false
-          type: string
-          format: date
-          description: Returns CTs to be executed to this date. Fromat yyyy-mm-dd.
-        - name: orderby
-          in: query
-          required: false
-          type: string
-          description: Order query by, default 'id' in descending order.
-        - name: originatoriban
-          in: query
-          required: false
-          type: string
-          pattern: '[a-zA-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}'
-          description: Used to filter credit transfers by provided originator IBAN.
-        - name: pagenumber
-          in: query
-          required: false
-          type: integer
-          format: int32
-          description: "Holds page number to be returned. Default: 1"
-          default: 1
-        - name: pagesize
-          in: query
-          required: false
-          type: integer
-          format: int32
-          description: "Holds page size to be returned. Default: 20"
-          default: 20
-        - name: paymentstatus
-          in: query
-          required: false
-          type: array
-          items:
-            type: string
-          collectionFormat: multi
-          enum:
-            - ALL
-            - READY_FOR_EXPORT
-            - REJECTED
-            - RECALLED
-            - EXPORTED
-            - ACCEPTED
-            - PENDING
-            - PENDING_SETTLEMENT
-          description: A number of statuses can be queried within a single request by providing multiple occurences of the parameter.
-      responses:
-        200:
-          description: OK
-          schema:
-            $ref: "#/definitions/RestPaginatedCollectionResponseEnvelopeOfCreditTransferResponseEntity"
-          examples:
-            application/json:
-              uri: /credittransfers
-              data:
-                - id: a2av38kz2w
-                  uri: /beneficiaries/abxq9ox92l/credittransfers/a2av38kz2w
-                  originatorIban: GB94SELN00999976543215
-                  originatorAccount:
-                    iban: "GB94SELN00999976543215"
-                    bic: "SELNGB21"
-                    domesticAccountNumber: "76543215"
-                    domesticBankCode: null
-                    domesticBranchCode: "009999"
-                    domesticCheckSum: null
-                    domesticAccountCountry: "GB"
-                  requestedExecutionDate: "2016-10-14"
-                  actualExecutionDate: "2016-10-15"
-                  paymentAmount: 5000.01
-                  paymentCurrency: EUR
-                  endToEndId: 12345678901330w4
-                  remittanceInformation: Remittance info
-                  structuredRemittanceInformation: null
-                  paymentStatus: READY_FOR_EXPORT
-                  type: EXPRESS
-                  paymentScheme: SCT
-                  ultimateCreditor: null
-                  ultimateDebtor: null
-                  beneficiaryName: Beneficiary Name
-                  beneficiaryAccount:
-                    iban: GB47SELN00999912345678
-                    domesticAccountNumber: "12345678"
-                    domesticBankCode: null
-                    domesticBranchCode: "009999"
-                    domesticCheckSum: null
-                    domesticAccountCountry: GB
-                    bic: SELNGB21
-                  rejectDetails:
-                    rejectReason: null,
-                    rejectDescription: null,
-                    rejectType: null,
-                    rejectDate: null
-                  originalBeneficiaryAccount:
-                    iban: null,
-                    domesticAccountNumber: null,
-                    domesticBankCode: null,
-                    domesticBranchCode: null,
-                    domesticCheckSum: null,
-                    domesticAccountCountry: null,
-                    bic: null                    
-                  links:
-                    - resourceType: beneficiary
-                      id: abxqg83n2l
-                      uri: /beneficiaries/abxqg83n2l
-                - id: j29p3gkabx
-                  uri: /beneficiaries/abxq9ox92l/credittransfers/j29p3gkabx
-                  originatorIban: GB94SELN00999976543215
-                  originatorAccount:
-                    iban: "GB94SELN00999976543215"
-                    bic: "SELNGB21"
-                    domesticAccountNumber: "76543215"
-                    domesticBankCode: null
-                    domesticBranchCode: "009999"
-                    domesticCheckSum: null
-                    domesticAccountCountry: "GB"
-                  requestedExecutionDate: "2016-10-14"
-                  paymentAmount: 1.01
-                  paymentCurrency: EUR
-                  endToEndId: abcdefghij1234
-                  remittanceInformation: Remittance info
-                  paymentStatus: READY_FOR_EXPORT
-                  type: STANDARD
-                  paymentScheme: SCT
-                  ultimateCreditor: null
-                  ultimateDebtor: null
-                  beneficiaryName: Beneficiary Name
-                  beneficiaryAccount:
-                    iban: GB47SELN00999912345678
-                    domesticAccountNumber: "12345678"
-                    domesticBankCode: null
-                    domesticBranchCode: "009999"
-                    domesticCheckSum: null
-                    domesticAccountCountry: GB
-                    bic: SELNGB21
-                  rejectDetails:
-                    rejectReason: null,
-                    rejectDescription: null,
-                    rejectType: null,
-                    rejectDate: null
-                  originalBeneficiaryAccount:
-                    iban: null,
-                    domesticAccountNumber: null,
-                    domesticBankCode: null,
-                    domesticBranchCode: null,
-                    domesticCheckSum: null,
-                    domesticAccountCountry: null,
-                    bic: null                    
-                  links:
-                    - resourceType: beneficiary
-                      id: abxqg83n2l
-                      uri: /beneficiaries/abxqg83n2l
-              page:
-                pageNumber: 1
-                totalPages: 1
-                pageSize: 20
-                totalElements: 2
-              sort: []
-        400:
-          description: Bad request
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "7001"
-              returnDescription: Date format invalid
-              details: null
-        401:
-          description: Unauthorized
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-        403:
-          description: Forbidden
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "10091"
-              returnDescription: Access denied
-              details: null
-        405:
-          description: Method Not Allowed
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-        422:
-          description: Unprocessable Entity
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "7002"
-              returnDescription: "'From Date' must be earlier or equal to 'To Date'"
-              details: null
-        429:
-          description: Too Many Requests
-          x-sentenial:
-            enriched: "true"
-          headers:
-            X-Rate-Limit-Reset:
-              type: integer
-              format: int32
-              description: Number in seconds to wait before retrying request.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-      security:
-        - MerchantOAuth2:
-          - credittransfers_read
-        - MerchantApiKey: []
-    post:
-      tags:
-        - Credit Transfers
-      summary: Create Credit Transfer and Beneficiary
-      description: A POST request used to a create credit transfers and beneficiary if none exists. A request must contain the application/json content type. In the request body you must provide a JSON structure describing the Credit Transfer and Beneficiary.
-      operationId: addCTBeneficiaryOnFlyUsingPOST
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-        - name: JWS-Signature
-          in: header
-          description: The header contains JWS Signature of payload body signed with Private Key of the Sender.  The PKI Key pair generation with Developer Dashboard is prerequisite for the Signature Generation.
-          required: true
-          type: string
-        - name: Dynamic-Link-Id
-          in: header
-          description: Optional header used to provide additional information for SCA.
-          required: false
-          type: string
-        - name: Idempotency-Key
-          in: header
-          x-sentenial:
-            enriched: "true"
-          description: Every request will be processed only once per Idempotency-Key.  The Idempotency Key will be valid for 24 hours.
-          required: false
-          type: string
-          maxLength: 50
-        - in: body
-          name: addCTBeneficiaryOnFlyRequest
-          description: addCTBeneficiaryOnFlyRequest
-          required: true
-          schema:
-            $ref: "#/definitions/AddCreditTransferAndBeneficiaryRequestEntity"
-      responses:
-        201:
-          description: Created
-          schema:
-            $ref: "#/definitions/RestResponseEnvelopeOfCreditTransferResponseEntity"
-          examples:
-            application/json:
-              uri: /beneficiaries/abxq9ox92l/credittransfers/a2av38kz2w
-              data:
-                id: a2av38kz2w
-                uri: /beneficiaries/abxq9ox92l/credittransfers/a2av38kz2w
-                originatorIban: GB94SELN00999976543215
-                originatorAccount:
-                  iban: GB94SELN00999976543215
-                  bic: SELNGB21
-                  domesticAccountNumber: "76543215"
-                  domesticBankCode: null
-                  domesticBranchCode: "009999"
-                  domesticCheckSum: null
-                  domesticAccountCountry: GB
-                requestedExecutionDate: "2016-10-14"
-                actualExecutionDate: "2016-10-15"
-                paymentAmount: 5000.01
-                paymentCurrency: EUR
-                endToEndId: 12345678901330w4
-                remittanceInformation: Remittance info
-                structuredRemittanceInformation: null
-                paymentStatus: READY_FOR_EXPORT
-                settlementDateShift: true
-                type: STANDARD
-                paymentScheme: SCT
-                ultimateCreditor:
-                  name: ultimate Creditor
-                  organisationId:
-                    bicOrBei: SELNGB21
-                    other: null
-                  privateId: null
-                ultimateDebtor:
-                  name: ultimate Debtor
-                  organisationId: null
-                  privateId:
-                    dateAndPlaceOfBirth:
-                      birthDate: "2000-05-09"
-                      cityOfBirth: city
-                      countryOfBirth: IE
-                    other: null
-                beneficiaryName: Beneficiary Name
-                beneficiaryAccount:
-                  iban: GB47SELN00999912345678
-                  domesticAccountNumber: "12345678"
-                  domesticBankCode: null
-                  domesticBranchCode: "009999"
-                  domesticCheckSum: null
-                  domesticAccountCountry: GB
-                  bic: SELNGB21
-                rejectDetails:
-                  rejectReason: null,
-                  rejectDescription: null,
-                  rejectType: null,
-                  rejectDate: null
-                originalBeneficiaryAccount:
-                  iban: null,
-                  domesticAccountNumber: null,
-                  domesticBankCode: null,
-                  domesticBranchCode: null,
-                  domesticCheckSum: null,
-                  domesticAccountCountry: null,
-                  bic: null                  
-              links:
-                - resourceType: beneficiary
-                  id: abxqg83n2l
-                  uri: /beneficiaries/abxqg83n2l
-        400:
-          description: Bad request
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "8888"
-              returnDescription: "Input validation errors occurred. Please check details."
-              details:
-                code: "5009"
-                field: "requestedExecutionDate"
-                description: "Invalid Date for Payment"
-                resourceUri: null
-        401:
-          description: Unauthorized
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-        403:
-          description: Forbidden
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "10091"
-              returnDescription: Access denied
-              details: null
-        404:
-          description: Not Found
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "10093"
-              returnDescription: Requested resource is not available
-              details: null
-
-        405:
-          description: Method Not Allowed
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-        412:
-          description: Precondition Failed
-          headers:
-            Dynamic-Link-Id:
-              description: Dynamic Link Id
-              type: string
-            Authorisation-Uri:
-              description: Authorisation Uri
-              type: string
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-        415:
-          description: Unsupported Media Type
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: null
-              returnDescription: null
-              details: null
-        422:
-          description: Unprocessable Entity
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-          examples:
-            application/json:
-              returnCode: "8888"
-              returnDescription: "Input validation errors occurred. Please check details."
-              details:
-                code: "5007"
-                field: originatorIban
-                description: "Originator Account provided does not exist"
-                resourceUri: null
         429:
           description: Too Many Requests
           x-sentenial:
@@ -8396,6 +6920,7 @@ securityDefinitions:
       transfers: Nuapay Transfers Write Access
       accounts: Nuapay and Non-Nuapay Accounts Write Access
       accounts_read: Nuapay and Non-Nuapay Accounts Read Access
+      accounts_settlements_read: Nuapay Accounts Settlements Read Access
       account_transaction_view: Nuapay Transactions Read Access
       account_validate: Account Validation Service Access
       schemes_read: Direct Debit Schemes Read Access
@@ -8463,6 +6988,10 @@ definitions:
           - AVAILABLE_BALANCE
           - BOOKED_BALANCE
         description: Balance type, in transaction object always 'BOOKED_BALANCE'.
+      timestamp:
+        type: integer
+        format: int64
+        description: Timestamp of balance after transaction calculation.  
   AccountIdentificationEntity:
     type: object
     properties:
@@ -8528,6 +7057,70 @@ definitions:
           type: string
         postCode:
           type: string
+  AccountSettlement:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Settlement Resourrce Id.
+      uri:
+        type: string
+        description: Settlement Resource Uri.
+      accountHolderName:
+        type: string
+        description: Name of Account Holder (Organistion  Name)
+      iban:
+        type: string
+        description: IBAN of account the settlement is done for.
+        pattern: '[A-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}'
+      settlementIban:
+        type: string
+        description: Settlement IBAN configured on the account.  When Settlement Amount is positive the money is send out to the Settlement IBAN.
+        pattern: '[A-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}'
+      currency:
+        type: string
+        enum:
+          - EUR
+          - GBP
+        description: The currency the settlement was done in.  At the same time it apply to account currency and Settlement Credit Transfer currency.
+      reserveForPayouts:
+        type: number
+        description: Reserve For Payouts configured on the account and taken into account while settlement amount was calculated.
+      settlementDate:
+        type: string
+        format: date
+        description: Settlement Date - date the money is  settling on the account.  The date of funds transfer.
+      settlementRunDate:
+        type: string
+        format: date-time
+        description: The date the Settlement has been executed.
+      minimumBalance:
+        type: number
+        description: The minimum balance configured on the account at the time of Settlement execution. The Minimum Balance decrease the Settlement Amount blocking the money to be left of the account.
+      openingBalance:
+        type: number
+        description: Its a previous Settlement  closing balance.
+      closingBalance:
+        type: number
+        description: Its a balance calculated as part of Settlement run reflecting how much money is left on account after the Settlement.
+      currentReserve:
+        type: number
+        description: Its amount of money calculated as part of Settlement run as Reserve for upcoming DD-Rtransactions (Float Amount).
+      previousReserve:
+        type: number
+        description: Its amount of money calculated as part of previous Settlement run as Reserve for upcoming DD-Rtransactions (Float Amount).
+      settlementAmount:
+        type: number
+        description: Its amount of money calcualted to be settled to Settlement IBAN via Settlement Credit Transfer. If Settlement Amount exeeds maximum Credit Transfer amount for the given payment currency and scheme its split to multiple Settlement Credit Transfers. Its calculated as Opening Balance + Account Credits - Account Debits  lowered by Current Reserve, Minimum Balance and Reserve For Payouts. If negative result calculated it would be returned as 0.
+      previousSettlementId:
+        type: string
+        description: It returnes the previous settlement id that was used to calculate `previousReserve` and `openingBalance`,
+      floatExposure:
+        $ref: "#/definitions/FloatExposure"
+      settlementCreditTransfers:
+        type: array
+        items:
+          $ref: "#/definitions/SettlementCreditTransfer"
   AccountValidationRestEntity:
     type: object
     properties:
@@ -8619,196 +7212,6 @@ definitions:
         bic: SELNGB21
       secondaryIdentification: REST ACC
       settlementIban: "IE72TURU99100404712507"
-  AddBeneficiaryRequestEntity:
-    type: object
-    required:
-      - beneficiary
-      - beneficiaryAccount
-    properties:
-      beneficiary:
-        $ref: "#/definitions/BeneficiaryRestEntity"
-      beneficiaryAccount:
-        $ref: "#/definitions/CreditTransferAccountEntity"
-    example:
-      beneficiary:
-        name: Beneficiary Name
-        address:
-          line1: Beneficiary Address Line1
-          line2: Beneficiary Address Line2
-          town: Beneficiary Town
-          postCode: "123123"
-          state: Beneficiary State
-          country: IE
-        language: en
-        email: beneficiary@mail.com
-        phoneNumber: "0360123123123"
-        mobileNumber: "0360321321321"
-        descriptionOfPurpose: Description of Purpose
-      beneficiaryAccount:
-        iban: GB47SELN00999912345678
-        bic: SELNGB21
-  AddCreditTransferAndBeneficiaryRequestEntity:
-    type: object
-    required:
-      - paymentAmount
-      - paymentCurrency
-      - beneficiary
-      - beneficiaryAccount
-    properties:
-      beneficiary:
-        $ref: "#/definitions/BeneficiaryRestEntity"
-      beneficiaryAccount:
-        $ref: "#/definitions/CreditTransferAccountEntity"
-      endToEndId:
-        type: string
-        pattern: "[0-9a-zA-Z\\,\\.\\+\\(\\)\\/:\\?\\'-]{0,35}"
-        description: Payment Reference
-      originatorAccount:
-        $ref: "#/definitions/CreditTransferAccountEntity"
-      originatorIban:
-        type: string
-        pattern: "[a-zA-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}"
-        description: Originator IBAN from which the credit transfer originated. To provide account in BBAN format please populate originatorAccount object instead.
-      paymentAmount:
-        type: number
-        minimum: 0.01
-        maximum: 999999999.99
-        description: Payment Amount. Max length without decimals is 9 digits. Decimal separator is '.'.  Max two decimal places allowed.
-      paymentCurrency:
-        type: string
-        description: Credit Transfer Currency
-        enum:
-          - EUR
-          - GBP
-      remittanceInformation:
-        type: string
-        description: Remmittance Information
-        maxLength: 140
-      requestedExecutionDate:
-        type: string
-        format: date
-        description: Requested Execution Date for the credit transfer. If not provided it will be set to the current processing date.
-      settlementDateShift:
-        type: boolean
-        description: If true, settlement date shift logic is applied and requestedCollectionDate can be shifted and returned as actualExecutionDate.
-      structuredRemittanceInformation:
-        $ref: "#/definitions/StructuredRemittanceInformation"
-      type:
-        type: string
-        description: Type of Credit Transfer. Determine which of available execution options (payment schemes) will be used to process the transfer. Note that standard payment scheme is always available. Other schemes will be used only when available. Response payment scheme determine which scheme was actually used to process the payment.
-        default: STANDARD
-        enum:
-          - STANDARD
-          - EXPRESS
-          - FASTEST_POSSIBLE
-      ultimateCreditor:
-        $ref: "#/definitions/UltimatePartyEntity"
-      ultimateDebtor:
-        $ref: "#/definitions/UltimatePartyEntity"
-    example:
-      originatorIban: GB94SELN00999976543215
-      requestedExecutionDate: "2016-10-14"
-      paymentAmount: 5000.01
-      paymentCurrency: EUR
-      endToEndId: 12345678901330w4
-      remittanceInformation: Remittance info
-      settlementDateShift: true
-      type: STANDARD
-      beneficiary:
-        name: Beneficiary Name
-        address:
-          line1: Beneficiary Address Line1
-          line2: Beneficiary Address Line2
-          town: Beneficiary Town
-          postCode: "123123"
-          state: Beneficiary State
-          country: IE
-        language: en
-        email: beneficiary@mail.com
-        phoneNumber: "0360123123123"
-        mobileNumber: "0360321321321"
-        descriptionOfPurpose: Description of Purpose
-      beneficiaryAccount:
-        iban: GB47SELN00999912345678
-        bic: SELNGB21
-      ultimateCreditor:
-        name: ultimate Creditor
-        organisationId:
-          bicOrBei: SELNGB21
-      ultimateDebtor:
-        name: ultimate Debtor
-        privateId:
-          dateAndPlaceOfBirth:
-            birthDate: "2000-05-09"
-            cityOfBirth: city
-            countryOfBirth: IE
-  AddCreditTransferRequestEntity:
-    type: object
-    required:
-      - paymentAmount
-      - paymentCurrency
-    properties:
-      endToEndId:
-        type: string
-        maxLength: 35
-        pattern: "[0-9a-zA-Z\\,\\.\\+\\(\\)\\/:\\?\\'-]{0,35}"
-        description: Payment Reference
-      originatorAccount:
-        $ref: "#/definitions/CreditTransferAccountEntity"
-      originatorIban:
-        type: string
-        pattern: "[a-zA-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}"
-        description: Originator IBAN from which the credit transfer originated. To provide account in BBAN format please populate originatorAccount object instead.
-      paymentAmount:
-        type: number
-        minimum: 0.01
-        maximum: 999999999.99
-        description: Payment Amount. Max length without decimals is 9 digits. Decimal separator is '.'. Max two decimal places allowed.
-      paymentCurrency:
-        type: string
-        enum:
-          - EUR
-          - GBP
-        description: Credit Transfer Currency, GBP and EUR are currently supported
-      remittanceInformation:
-        type: string
-
-        description: Unstructured remittance information. Either `remittanceInformation`  or `structuredRemittanceInformation` can be provided
-        maxLength: 140
-      requestedExecutionDate:
-        type: string
-        format: date
-        description: "Requested Execution Date for the credit transfer. If not provided it will be set to the current processing date. In format YYYY-MM-DD"
-      settlementDateShift:
-        type: boolean
-        description: If true, settlement date shift logic is applied and requestedCollectionDate can be shifted and returned as actualCollectionDate.
-      structuredRemittanceInformation:
-        $ref: "#/definitions/StructuredRemittanceInformation"
-      type:
-        type: string
-        default: STANDARD
-        enum:
-          - STANDARD
-          - EXPRESS
-          - FASTEST_POSSIBLE
-        description: |-
-          Type of Credit Transfer. Determine which of available execution options (payment schemes) will be used to process the transfer. 
-
-          Note: that standard payment scheme is always available. Other schemes will be used only when available. 
-
-          Response payment scheme determine which scheme was actually used to process the payment.
-      ultimateCreditor:
-        $ref: "#/definitions/UltimatePartyEntity"
-      ultimateDebtor:
-        $ref: "#/definitions/UltimatePartyEntity"
-    example:
-      originatorIban: GB94SELN00999976543215
-      requestedExecutionDate: "2016-10-14"
-      paymentAmount: 5000.01
-      paymentCurrency: EUR
-      endToEndId: 12345678901330w4
-      remittanceInformation: Remittance info
-      settlementDateShift: true
   AddSinglePaymentMOTFRequestEntity:
     type: object
     required:
@@ -9002,85 +7405,6 @@ definitions:
         format: int32
         default: 20
         description: Number of elements to be returned on single page. Default to '20' elements.
-  BeneficiaryAddressEntity:
-    type: object
-    properties:
-      line1:
-        type: string
-        description: Beneficiary Address Line 1
-        maxLength: 70
-      line2:
-        type: string
-        description: Beneficiary Address Line 2
-        maxLength: 70
-      town:
-        type: string
-        maxLength: 35
-        description: Beneficiary Address City/Town
-      postCode:
-        type: string
-        maxLength: 16
-        description: Beneficiary Address Post Code
-      state:
-        type: string
-        maxLength: 35
-        description: Beneficiary Address State/Province/County
-      country:
-        type: string
-        minLength: 2
-        maxLength: 2
-        description: Two letter ISO country code.
-      streetName:
-        type: string
-        description: Name of a street or thoroughfare. Use the field instead or `line1` to provide name of the street. If both provided value from this field will override `line1` value
-        maxLength: 70
-      buildingNumber:
-        type: string
-        description: Number that identifies the position of a building on a street.
-        maxLength: 16
-  BeneficiaryRestEntity:
-    type: object
-    required:
-      - name
-    properties:
-      address:
-        $ref: "#/definitions/BeneficiaryAddressEntity"
-      descriptionOfPurpose:
-        type: string
-        maxLength: 140
-        description: Purpose for the Beneficiary creation
-      email:
-        type: string
-        maxLength: 254
-        pattern: .*@.*
-        description: Beneficiary Email Address
-      language:
-        type: string
-        enum:
-          - en
-          - pt
-          - nl
-          - fr
-          - it
-          - es
-          - de
-          - sk
-          - fr_BE
-          - nl_BE
-        description: Communication language
-      mobileNumber:
-        type: string
-        maxLength: 30
-        description: Beneficiary Mobile Number
-      name:
-        type: string
-        minLength: 1
-        maxLength: 70
-        description: Beneficiary Name
-      phoneNumber:
-        type: string
-        maxLength: 30
-        description: Beneficiary Phone Number
   CancelPaymentScheduleRequestEntity:
     type: object
     properties:
@@ -9099,42 +7423,6 @@ definitions:
         $ref: "#/definitions/Address"
       name:
         type: string
-  CreditTransferAccountEntity:
-    type: object
-    properties:
-      iban:
-        type: string
-        pattern: "[a-zA-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}"
-        description: Beneficiary Account IBAN.
-      bic:
-        type: string
-        pattern: "[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}"
-        description: Beneficiary Account BIC.
-      domesticAccountCountry:
-        type: string
-        minLength: 2
-        maxLength: 2
-        description: Two letter ISO country code representing the Beneficiary Domestic Account Country.
-      domesticAccountNumber:
-        type: string
-        minLength: 1
-        maxLength: 20
-        description: Beneficiary Domestic Account Number.
-      domesticBankCode:
-        type: string
-        minLength: 1
-        maxLength: 10
-        description: Beneficiary Domestic Account Bank Code.
-      domesticBranchCode:
-        type: string
-        minLength: 1
-        maxLength: 10
-        description: Beneficiary Domestic Account Branch Code.
-      domesticCheckSum:
-        type: string
-        minLength: 1
-        maxLength: 2
-        description: Beneficiary Domestic Account Check Sum. When used in a request use either IBAN & BIC or Domestic Account details, not both.
   CreditorAccountRestEntity:
     type: object
     properties:
@@ -9159,27 +7447,6 @@ definitions:
           - CORE
           - B2B
           - BACS
-  DateAndPlaceOfBirthEntity:
-    type: object
-    required:
-      - birthDate
-      - cityOfBirth
-      - countryOfBirth
-    properties:
-      birthDate:
-        type: string
-        format: date
-        description: Ultimate Creditor/Debtor Birth Date, in format YYYY-MM-DD.
-      cityOfBirth:
-        type: string
-        minLength: 1
-        maxLength: 35
-        description: Ultimate Creditor/Debtor City of Birth
-      countryOfBirth:
-        type: string
-        minLength: 1
-        maxLength: 2
-        description: Ultimate Creditor/Debtor country of birthm ISO3166-1 alpha-2 country code.
   DebtorAccountRestEntity:
     type: object
     properties:
@@ -9374,6 +7641,23 @@ definitions:
         type: string
       returnDescription:
         type: string
+  FloatExposure:
+    type: object
+    properties:
+      numberOfTransactions:
+        type: integer
+        format: int32
+        description: Number of Direct Debits taken into account for Float Amount calculation
+      valueOfTransactions:
+        type: number
+        description: Total amount of Direct Debits taken into account for Float Amount calculation.
+      floatRate:
+        type: integer
+        format: int32
+        description: Float Percentage is a variable taken into account  when calculating Float Amount. Its a value between 0% and 99%.
+      maxExposurePreFloat:
+        type: number
+        description: The Exposure amount is a variable taken into account  when calculating Float Amount.  This setting holds threshold for Exposure. If Exposure is lower than the threshold -  Float Amount is set to 0 regardless of the calculation result.
   ListAccountRequestEntity:
     type: object
     properties:
@@ -9387,22 +7671,44 @@ definitions:
       page:
         pageNumber: 1
         pageSize: 10
-  ListAccountTransactionsRequest:
+  ListNuapayAccountTransactionsRequest:
     type: object
     properties:
       filter:
-        $ref: "#/definitions/TransactionFilterEntity"
+        $ref: "#/definitions/NuapayTransactionFilter"
       page:
         $ref: "#/definitions/PageFilterEntity"
     example:
-      filter:
-        valueDateFrom: 1500542067000
-        valueDateTo: 1518517758000
-        amountFrom: 10
-        amountTo: 50000
+     filter:
+       valueDateFrom: '2025-02-13'
+       valueDateTo: '2025-03-14'
+       amountFrom: 10
+       amountTo: 124
+       remittanceInfo: remittance
+       endToEndId: End to end id
+       counterpartyName: name
+       counterpartyIban: FR7612346543217416767799004
+       creditDebitIndicator: CREDIT
+       type: CREDIT_TRANSFERS
+     page:
+       pageNumber: 1
+       pageSize: 20
+  ListAccountSettlementsResponse:
+    type: object
+    properties:
+      uri:
+        type: string
+        description: resource Uri
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/AccountSettlement"
       page:
-        pageNumber: 1
-        pageSize: 1
+        $ref: "#/definitions/RestResponsePaginationDetails"
+      sort:
+        type: array
+        items:
+          type: string
   ListAccountTransactionsResponse:
     type: object
     properties:
@@ -9419,55 +7725,6 @@ definitions:
       uri:
         type: string
         description: resource Uri
-  ListCreditTransferPostFilterEntity:
-    type: object
-    properties:
-      beneficiaryAccount:
-        type: string
-        pattern: "[0-9a-zA-Z]{3,34}"
-        description: Used  to filter by beneficiary acocunt information, either IBAN or Domestic Account Number. Must provide at least 3 characters.
-      beneficiaryName:
-        type: string
-        maxLength: 70
-        description: Used to filter credit transfers by provided beneficiary name. Full and partial name supported.
-      executionDateFrom:
-        type: string
-        format: date
-        description: Returns CTs to be executed from this date. Fromat yyyy-mm-dd.
-      executionDateTo:
-        type: string
-        format: date
-        description: Returns CTs to be executed to this date. Fromat yyyy-mm-dd.
-      paymentStatuses:
-        type: array
-        items:
-          type: string
-          enum:
-            - READY_FOR_EXPORT
-            - REJECTED
-            - RECALLED
-            - EXPORTED
-            - ACCEPTED
-            - PENDING
-            - PENDING_SETTLEMENT
-        description: List of statuses to filter for. To search for all statuses do not provide the 'paymentStatuses' parameter.
-  ListCreditTransferPostRequestEntity:
-    type: object
-    properties:
-      filter:
-        $ref: "#/definitions/ListCreditTransferPostFilterEntity"
-      page:
-        $ref: "#/definitions/BasePostPageElementRequest"
-    example:
-      page:
-        pageNumber: 1
-        pageSize: 1
-      filter:
-        executionDateFrom: "2018-10-21"
-        executionDateTo: "2018-10-28"
-        paymentStatuses: ["READY_FOR_EXPORT", "PENDING"]
-        beneficiaryName: Beneficiary Name
-        beneficiaryAccount: GB47SELN00999912345678
   MandateInfoResponse:
     type: object
     properties:
@@ -9529,16 +7786,14 @@ definitions:
       emandateAuthenticationDetails:
         authentication: AISP
         authenticationReference: "2c8f2c6e9002"
-  OrganisationIdEntity:
+  RetrieveAccountSettlementResponse:
     type: object
-    description: Either 'BIC or BEI' or one occurance of 'Other' is allowed.
     properties:
-      bicOrBei:
+      uri:
         type: string
-        pattern: "[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}"
-        description: The ultimate creditor/debtor bic.
-      other:
-        $ref: "#/definitions/OtherEntity"
+        description: resource Uri
+      data:
+        $ref: "#/definitions/AccountSettlement"
   OriginatorAccount:
     type: object
     properties:
@@ -9869,14 +8124,6 @@ definitions:
       remittanceInformation: remittanceInformation
       twoPaymentsSamePeriod: true
       settlementDateShift: true
-  PrivateIdEntity:
-    type: object
-    description: Either 'Date and Place of Birth' or one occurrence of 'Other' is allowed.
-    properties:
-      dateAndPlaceOfBirth:
-        $ref: "#/definitions/DateAndPlaceOfBirthEntity"
-      other:
-        $ref: "#/definitions/OtherEntity"
   RejectDetailsResponse:
     type: object
     properties:
@@ -10063,38 +8310,6 @@ definitions:
       uri:
         type: string
         description: resource Uri
-  RestPaginatedCollectionResponseEnvelopeOfCreditTransferResponseEntity:
-    type: object
-    properties:
-      data:
-        type: array
-        items:
-          $ref: "#/definitions/RestResponseEnvelopeInnerOfCreditTransferResponseEntity"
-      page:
-        $ref: "#/definitions/RestResponsePaginationDetails"
-      sort:
-        type: array
-        items:
-          type: string
-      uri:
-        type: string
-        description: resource Uri
-  RestPaginatedCollectionResponseEnvelopeOfListBeneficiaryResponseEntity:
-    type: object
-    properties:
-      data:
-        type: array
-        items:
-          $ref: "#/definitions/RestResponseEnvelopeInnerOfListBeneficiaryResponseEntity"
-      page:
-        $ref: "#/definitions/RestResponsePaginationDetails"
-      sort:
-        type: array
-        items:
-          type: string
-      uri:
-        type: string
-        description: resource Uri
   RestPaginatedCollectionResponseEnvelopeOfListDirectDebitResponseEntity:
     type: object
     properties:
@@ -10187,6 +8402,9 @@ definitions:
           - PENDING
           - ERROR
         description: Account status. Only ACTIVE accounts are available for payment processing.
+      externalId:
+        type: string
+        description: External resource ID
       uri:
         type: string
         description: resource Uri
@@ -10237,6 +8455,14 @@ definitions:
       id:
         type: string
         description: Resource Id
+      creationDateTime:
+        type: string
+        format: date-time
+        description: Creation Date time of the transction. 
+      creationTimestamp: 
+        type: integer
+        format: int64
+        description: Epoch timestamp of the creation date time of transaction.  Same as Account Entry webhook  eventTimestamp. 
       links:
         type: array
         items:
@@ -10358,26 +8584,6 @@ definitions:
       uri:
         type: string
         description: Resource URI
-  RestResponseEnvelopeInnerOfAddBeneficiaryResponseEntity:
-    type: object
-    required:
-      - beneficiary
-      - beneficiaryAccount
-    properties:
-      beneficiary:
-        $ref: "#/definitions/BeneficiaryRestEntity"
-      beneficiaryAccount:
-        $ref: "#/definitions/CreditTransferAccountEntity"
-      id:
-        type: string
-        description: Resource Id
-      links:
-        type: array
-        items:
-          $ref: "#/definitions/RestResponseLink"
-      uri:
-        type: string
-        description: resource Uri
   RestResponseEnvelopeInnerOfAddSinglePaymentResponseEntity:
     type: object
     properties:
@@ -10451,96 +8657,6 @@ definitions:
       uri:
         type: string
         description: Resource Uri
-  RestResponseEnvelopeInnerOfCreditTransferResponseEntity:
-    type: object
-    properties:
-      beneficiaryAccount:
-        $ref: "#/definitions/AccountIdentificationEntity"
-      beneficiaryName:
-        type: string
-        maxLength: 70
-      endToEndId:
-        type: string
-        maxLength: 35
-        description: End to End Id
-      id:
-        type: string
-        description: Resource Id
-      links:
-        type: array
-        items:
-          $ref: "#/definitions/RestResponseLink"
-      originatorAccount:
-        $ref: "#/definitions/CreditTransferAccountEntity"
-      originatorIban:
-        type: string
-        pattern: "[a-zA-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}"
-        description: The iban that Credit Transfer is send from.
-      paymentAmount:
-        type: number
-        minimum: 0.01
-        maximum: 999999999.99
-        description: Credit Transfer Amount
-      paymentCurrency:
-        type: string
-        description: Credit Transfer Currency
-        enum:
-          - GBP
-          - EUR
-      paymentScheme:
-        type: string
-        description: Indicate which payment scheme the credit transfer was processed with.
-        enum:
-          - SCT
-          - SCT_INSTANT
-          - BACS
-          - FPS
-          - CHAPS
-      paymentStatus:
-        type: string
-        enum:
-          - READY_FOR_EXPORT
-          - REJECTED
-          - RECALLED
-          - EXPORTED
-          - ACCEPTED
-          - PENDING
-          - PENDING_SETTLEMENT
-      remittanceInformation:
-        type: string
-        description: Remmittance Information
-        maxLength: 140
-      requestedExecutionDate:
-        type: string
-        format: date
-        description: Requested Execution Date for the credit transfer
-      actualExecutionDate:
-        type: string
-        format: date
-        description: The actual execution date of the credit transfer, this can be different to the requested execution date if settlement date shift is applied
-      settlementDateShift:
-        type: boolean
-        description: If true, settlement date shift logic was applied to the credit transfer
-      structuredRemittanceInformation:
-        $ref: "#/definitions/StructuredRemittanceInformation"
-      type:
-        type: string
-        description: Requested Credit Transfer type.
-        enum:
-          - STANDARD
-          - EXPRESS
-          - FASTEST_POSSIBLE
-      uri:
-        type: string
-        description: resource Uri
-      ultimateCreditor:
-        $ref: "#/definitions/UltimatePartyEntity"
-      ultimateDebtor:
-        $ref: "#/definitions/UltimatePartyEntity"
-      rejectDetails:
-        $ref: "#/definitions/RejectDetailsResponse"
-      originalBeneficiaryAccount:
-        $ref: '#/definitions/AccountIdentificationEntity'        
   RestResponseEnvelopeInnerOfCreditorSchemeResponseEntity:
     type: object
     properties:
@@ -10604,26 +8720,6 @@ definitions:
         type: integer
         format: int64
         description: "The date the balance was queried for. Note: This is not the request date and may be past or future date"
-      uri:
-        type: string
-        description: resource Uri
-  RestResponseEnvelopeInnerOfListBeneficiaryResponseEntity:
-    type: object
-    required:
-      - beneficiary
-      - beneficiaryAccount
-    properties:
-      beneficiary:
-        $ref: "#/definitions/BeneficiaryRestEntity"
-      beneficiaryAccount:
-        $ref: "#/definitions/CreditTransferAccountEntity"
-      id:
-        type: string
-        description: Resource Id
-      links:
-        type: array
-        items:
-          $ref: "#/definitions/RestResponseLink"
       uri:
         type: string
         description: resource Uri
@@ -11055,26 +9151,6 @@ definitions:
       uri:
         type: string
         description: Resource URI.
-  RestResponseEnvelopeInnerOfViewBeneficiaryResponseEntity:
-    type: object
-    required:
-      - beneficiary
-      - beneficiaryAccount
-    properties:
-      beneficiary:
-        $ref: "#/definitions/BeneficiaryRestEntity"
-      beneficiaryAccount:
-        $ref: "#/definitions/CreditTransferAccountEntity"
-      id:
-        type: string
-        description: Resource Id
-      links:
-        type: array
-        items:
-          $ref: "#/definitions/RestResponseLink"
-      uri:
-        type: string
-        description: resource Uri
   RestResponseEnvelopeInnerOfViewDirectDebitResponseEntity:
     type: object
     properties:
@@ -11162,27 +9238,11 @@ definitions:
       uri:
         type: string
         description: Resource Uri
-  RestResponseEnvelopeOfAddBeneficiaryResponseEntity:
-    type: object
-    properties:
-      data:
-        $ref: "#/definitions/RestResponseEnvelopeInnerOfAddBeneficiaryResponseEntity"
-      uri:
-        type: string
-        description: Resource Uri
   RestResponseEnvelopeOfAddSinglePaymentResponseEntity:
     type: object
     properties:
       data:
         $ref: "#/definitions/RestResponseEnvelopeInnerOfAddSinglePaymentResponseEntity"
-      uri:
-        type: string
-        description: Resource Uri
-  RestResponseEnvelopeOfCreditTransferResponseEntity:
-    type: object
-    properties:
-      data:
-        $ref: "#/definitions/RestResponseEnvelopeInnerOfCreditTransferResponseEntity"
       uri:
         type: string
         description: Resource Uri
@@ -11232,14 +9292,6 @@ definitions:
         $ref: "#/definitions/RestResponseEnvelopeInnerOfTransfersResponse"
       uri:
         type: string
-  RestResponseEnvelopeOfViewBeneficiaryResponseEntity:
-    type: object
-    properties:
-      data:
-        $ref: "#/definitions/RestResponseEnvelopeInnerOfViewBeneficiaryResponseEntity"
-      uri:
-        type: string
-        description: Resource Uri
   RestResponseEnvelopeOfViewDirectDebitResponseEntity:
     type: object
     properties:
@@ -11301,7 +9353,9 @@ definitions:
             domesticBankCode: null
             domesticBranchCode: null
             domesticCheckSum: null
-            domesticAccountCountry: null      
+            domesticAccountCountry: null 
+        creationDateTime: "2022-05-19T10:32:01Z"
+        creationTimestamp: 1652956321000
   RestResponseLink:
     type: object
     properties:
@@ -11375,23 +9429,56 @@ definitions:
         minLength: 1
         maxLength: 35
         description: Private ID Other Scheme Name Proprietary
-  TransactionFilterEntity:
+  NuapayTransactionFilter:
     type: object
     properties:
-      amountFrom:
-        type: number
-        description: Amount From
-      amountTo:
-        type: number
-        description: Amount To
       valueDateFrom:
-        type: integer
-        format: int64
-        description: "Value Date From, Format: timestamp"
+        type: string
+        format: date-time
       valueDateTo:
-        type: integer
-        format: int64
-        description: "Value Date To, Format: timestamp"
+        type: string
+        format: date-time
+      amountFrom:
+        type: string
+        minimum: 0
+        maximum: 999999999999.99
+      amountTo:
+        type: string
+        minimum: 0
+        maximum: 999999999999.99
+      remittanceInfo:
+        type: string
+      endToEndId:
+        type: string
+      counterpartyName:
+        type: string
+      counterpartyIban:
+        type: string
+      counterpartyAccountNumber:
+        type: string
+      reference:
+        type: string
+      creditDebitIndicator:
+        type: string
+        enum:
+          - DEBIT
+          - CREDIT
+      type:
+        type: string
+        enum:
+          - FEES
+          - DIRECT_DEBITS
+          - CREDIT_TRANSFERS
+          - INTERNAL
+          - OTHER
+      settlementId:
+        type: string
+        description:  Settlement Id as received in the List Settlements for Account Response
+      transactionType: 
+        type: array
+        items:
+          type: string
+        description: Transaction Types - allow to filter specific transaction types. 
   TransfersRequest:
     type: object
     required:
@@ -11433,17 +9520,6 @@ definitions:
         iban: GB35SELN00999903769154
       accountTo:
         iban: GB20SELN00999923882374
-  UltimatePartyEntity:
-    type: object
-    properties:
-      name:
-        type: string
-        maxLength: 70
-        description: Ultimate creditor / debtor name
-      organisationId:
-        $ref: "#/definitions/OrganisationIdEntity"
-      privateId:
-        $ref: "#/definitions/PrivateIdEntity"
   UploadFileResponse:
     type: object
     properties:
@@ -11549,3 +9625,25 @@ definitions:
         type: string
         format: date-time
         description: Date and time of rejection.
+  SettlementCreditTransfer:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Settlement Credit Transfer Id
+      uri:
+        type: string
+        description: Settlement Credit Transfer Uri
+      amount:
+        type: number
+        description: Settlement Credit Tranfer Amount
+      currency:
+        type: string
+        enum:
+          - EUR
+          - GBP
+        description: Settlement Credit Transfer Currency
+      executionDate:
+        type: string
+        format: date
+        description: Settlement Credit Transfer Execution Date
